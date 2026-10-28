@@ -49,21 +49,47 @@ Dès que c'est fait, chaque modification (admin ou code) déclenche
 automatiquement : construction du site → contrôle qualité → envoi FTP.
 Suivi visible dans l'onglet **Actions** du dépôt.
 
-### 3. Donner l'accès au client
-1. Le client crée un compte GitHub gratuit (ou vous l'ajoutez comme
-   collaborateur du dépôt : Settings → Collaborators).
-2. Il ouvre **https://az-demenagement.be/admin/** → « Sign in with Token ».
-3. La fenêtre propose un lien qui pré-remplit la création du jeton GitHub
-   (permission « Contents : Read and write » sur le dépôt). Il génère le
-   jeton, le colle, c'est mémorisé dans son navigateur.
-4. Il modifie, clique **Enregistrer** — le site est à jour 2 minutes plus tard.
+### 3. Activer la fenêtre identifiant + mot de passe (type wp-admin)
+
+L'accès à `/admin/` est protégé par une vraie fenêtre de connexion
+(identifiant + mot de passe), gérée par le serveur Infomaniak.
+
+1. **Trouver le chemin du site sur le serveur** : ouvrez une fois
+   `https://az-demenagement.be/chemin.php` — la page affiche le chemin
+   (ex. `/home/clients/xxxxxxxx/sites/az-demenagement.be`).
+2. Dans [public/admin/.htaccess](public/admin/.htaccess), remplacez
+   `CHEMIN_ABSOLU_DU_SITE` par ce chemin.
+3. **Définir l'identifiant et le mot de passe** (depuis le dossier du
+   projet, sur votre Mac — choisissez un mot de passe neuf) :
+   ```bash
+   htpasswd -bBc public/admin/.htpasswd admin 'VotreMotDePasseIci'
+   ```
+   (remplacez `admin` et le mot de passe par ce que vous voulez ;
+   relancez la même commande pour changer le mot de passe plus tard)
+4. Supprimez `public/chemin.php` du projet et du serveur.
+5. Commitez/poussez (ou redéployez le zip) : la fenêtre de connexion
+   apparaît désormais à l'ouverture de `/admin/`.
+
+### 4. Connecter l'admin au dépôt (une fois par navigateur, par vous)
+Dernière étape technique, à faire **par vous, une seule fois sur chaque
+navigateur du client** (le client n'a pas à s'en occuper) :
+
+1. Sur l'ordinateur du client, ouvrez `az-demenagement.be/admin/` et
+   entrez l'identifiant/mot de passe définis à l'étape 3.
+2. L'écran « Sign in with Token » s'affiche : cliquez le lien proposé
+   (création du jeton GitHub pré-remplie, permission « Contents : Read
+   and write » sur le dépôt), générez le jeton, collez-le.
+3. C'est mémorisé dans ce navigateur : le client ne reverra plus cet
+   écran. Gardez le jeton en lieu sûr pour un éventuel nouveau PC.
 
 ## Au quotidien (côté client)
 
 1. Ouvrir `az-demenagement.be/admin/`
-2. Choisir l'écran (Boutique, FAQ, Réglages…)
-3. Modifier, téléverser des photos si besoin (glisser-déposer)
-4. **Enregistrer** → publication automatique
+2. Entrer l'**identifiant** et le **mot de passe** (le navigateur propose
+   de les enregistrer — ensuite c'est automatique)
+3. Choisir l'écran (Boutique, FAQ, Réglages…)
+4. Modifier, téléverser des photos si besoin (glisser-déposer)
+5. **Enregistrer** → publication automatique en 1-2 minutes
 
 ## Limites actuelles (extensibles sur demande)
 

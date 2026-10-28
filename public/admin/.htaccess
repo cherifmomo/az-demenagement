@@ -1,0 +1,14 @@
+# ============================================================
+# Protection de l'administration par identifiant + mot de passe
+# (fenêtre de connexion native du navigateur, comme wp-admin).
+#
+# ⚠️ REMPLACER CHEMIN_ABSOLU_DU_SITE par le chemin complet du site
+#    sur le serveur Infomaniak, ex. :
+#    /home/clients/xxxxxxxxxx/sites/az-demenagement.be
+#    (voir GUIDE-ADMIN.md — le fichier chemin.php l'affiche)
+# ============================================================
+
+AuthType Basic
+AuthName "Administration AZ Demenagement"
+AuthUserFile CHEMIN_ABSOLU_DU_SITE/admin/.htpasswd
+Require valid-user
