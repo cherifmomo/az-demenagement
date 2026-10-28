@@ -16,7 +16,7 @@ session_start();
 
 // --- Lecture des identifiants depuis .env ---
 function lire_env(string $fichier): array {
-  $valeurs = ['ADMIN_USER' => '', 'ADMIN_PASS' => ''];
+  $valeurs = ['ADMIN_USER' => '', 'ADMIN_PASS' => '', 'GITHUB_TOKEN' => ''];
   if (!is_readable($fichier)) return $valeurs;
   foreach (file($fichier, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $ligne) {
     $ligne = trim($ligne);
@@ -124,6 +124,10 @@ header('X-Robots-Tag: noindex, nofollow');
     </form>
     <p class="retour"><a href="/">← Retour au site</a></p>
   </main>
+  <script>
+    // Hors session : aucun jeton ne doit rester dans ce navigateur
+    try { localStorage.removeItem('sveltia-cms.auth'); } catch (e) {}
+  </script>
 </body>
 </html>
 <?php else: ?>
@@ -140,6 +144,21 @@ header('X-Robots-Tag: noindex, nofollow');
 </head>
 <body>
   <div class="barre-admin"><a href="/admin/?logout">Se déconnecter</a></div>
+  <!-- Connexion GitHub automatique : le jeton (GITHUB_TOKEN du fichier .env,
+       jamais exposé tant qu'on n'est pas connecté) est injecté dans le
+       stockage du CMS. Le client ne voit jamais d'écran GitHub. -->
+  <script>
+    try {
+      var jeton = <?= json_encode($env['GITHUB_TOKEN']) ?>;
+      if (jeton) {
+        var actuel = null;
+        try { actuel = JSON.parse(localStorage.getItem('sveltia-cms.auth') || 'null'); } catch (e) {}
+        if (!actuel || actuel.token !== jeton) {
+          localStorage.setItem('sveltia-cms.auth', JSON.stringify({ backendName: 'github', token: jeton }));
+        }
+      }
+    } catch (e) {}
+  </script>
   <!-- Sveltia CMS : interface d'administration du contenu -->
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 </body>
