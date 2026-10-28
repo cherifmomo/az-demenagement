@@ -49,26 +49,27 @@ Dès que c'est fait, chaque modification (admin ou code) déclenche
 automatiquement : construction du site → contrôle qualité → envoi FTP.
 Suivi visible dans l'onglet **Actions** du dépôt.
 
-### 3. Activer la fenêtre identifiant + mot de passe (type wp-admin)
+### 3. Identifiant et mot de passe de l'admin (fichier .env)
 
-L'accès à `/admin/` est protégé par une vraie fenêtre de connexion
-(identifiant + mot de passe), gérée par le serveur Infomaniak.
+La page `/admin/` affiche une page de connexion (identifiant + mot de
+passe, comme wp-admin). Les identifiants sont dans un simple fichier
+texte : **`admin/.env`** sur le serveur.
 
-1. **Trouver le chemin du site sur le serveur** : ouvrez une fois
-   `https://az-demenagement.be/chemin.php` — la page affiche le chemin
-   (ex. `/home/clients/xxxxxxxx/sites/az-demenagement.be`).
-2. Dans [public/admin/.htaccess](public/admin/.htaccess), remplacez
-   `CHEMIN_ABSOLU_DU_SITE` par ce chemin.
-3. **Définir l'identifiant et le mot de passe** (depuis le dossier du
-   projet, sur votre Mac — choisissez un mot de passe neuf) :
-   ```bash
-   htpasswd -bBc public/admin/.htpasswd admin 'VotreMotDePasseIci'
+**Pour définir ou changer le mot de passe :**
+1. Ouvrez FileZilla → dossier `admin/` du site → double-cliquez `.env`
+   (activez « Serveur → Forcer l'affichage des fichiers cachés » si
+   vous ne le voyez pas).
+2. Modifiez les lignes, en clair :
    ```
-   (remplacez `admin` et le mot de passe par ce que vous voulez ;
-   relancez la même commande pour changer le mot de passe plus tard)
-4. Supprimez `public/chemin.php` du projet et du serveur.
-5. Commitez/poussez (ou redéployez le zip) : la fenêtre de connexion
-   apparaît désormais à l'ouverture de `/admin/`.
+   ADMIN_USER=admin
+   ADMIN_PASS=le-mot-de-passe-que-vous-voulez
+   ```
+3. Enregistrez (FileZilla propose de renvoyer le fichier : oui).
+   Le changement est immédiat.
+
+⚠️ Après la première mise en ligne, changez tout de suite le mot de
+passe par défaut (`changez-moi-vite`). Le fichier `.env` est bloqué
+par le serveur : impossible de le lire depuis un navigateur.
 
 ### 4. Connecter l'admin au dépôt (une fois par navigateur, par vous)
 Dernière étape technique, à faire **par vous, une seule fois sur chaque

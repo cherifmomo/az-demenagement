@@ -1,12 +1,12 @@
 # ============================================================
 # Administration du site az-demenagement.be (Sveltia CMS)
-# ⚠️ Remplacez VOTRE-COMPTE-GITHUB par le nom du compte GitHub
+# Dépôt GitHub : cherifmomo/az-demenagement
 #    une fois le dépôt créé (ex. azsolutions/az-demenagement).
 # ============================================================
 
 backend:
   name: github
-  repo: VOTRE-COMPTE-GITHUB/az-demenagement
+  repo: cherifmomo/az-demenagement
   branch: main
 
 site_url: https://az-demenagement.be
