@@ -126,7 +126,9 @@ header('X-Robots-Tag: noindex, nofollow');
   </main>
   <script>
     // Hors session : aucun jeton ne doit rester dans ce navigateur
-    try { localStorage.removeItem('sveltia-cms.auth'); } catch (e) {}
+    try { localStorage.removeItem('sveltia-cms.user'); } catch (e) {}
+    // Nettoie l'adresse résiduelle du CMS (#/collections/…)
+    try { if (location.hash) history.replaceState(null, '', '/admin/'); } catch (e) {}
   </script>
 </body>
 </html>
@@ -152,9 +154,9 @@ header('X-Robots-Tag: noindex, nofollow');
       var jeton = <?= json_encode($env['GITHUB_TOKEN']) ?>;
       if (jeton) {
         var actuel = null;
-        try { actuel = JSON.parse(localStorage.getItem('sveltia-cms.auth') || 'null'); } catch (e) {}
+        try { actuel = JSON.parse(localStorage.getItem('sveltia-cms.user') || 'null'); } catch (e) {}
         if (!actuel || actuel.token !== jeton) {
-          localStorage.setItem('sveltia-cms.auth', JSON.stringify({ backendName: 'github', token: jeton }));
+          localStorage.setItem('sveltia-cms.user', JSON.stringify({ backendName: 'github', token: jeton }));
         }
       }
     } catch (e) {}
