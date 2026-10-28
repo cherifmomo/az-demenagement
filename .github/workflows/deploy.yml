@@ -51,3 +51,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_DIR }}
           local-dir: dist/
+          # Ne jamais écraser le mot de passe admin modifié via FTP
+          exclude: |
+            admin/.env
