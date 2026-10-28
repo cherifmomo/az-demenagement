@@ -1,0 +1,450 @@
+---
+// Boutique : catalogue cartons & matériel de déménagement.
+// Produits et prix : src/data/products.ts (tarif fournisseur du 04/04/2026).
+// Vente par téléphone uniquement — aucun paiement en ligne.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Icon from '../components/Icon.astro';
+import { company } from '../data/company';
+import { products, productCategories } from '../data/products';
+
+const title = 'Cartons & matériel de déménagement — Boutique | AZ Déménagement';
+const description =
+  "Achetez vos cartons de déménagement, kits complets, papier bulle, housses matelas, sangles, chariot et diable à Bruxelles. Prix affichés, commande par téléphone au 0471 / 65 39 47.";
+
+const fmt = (p: number) => p.toFixed(2).replace('.', ',') + ' €';
+
+// Données structurées : liste de produits avec prix vérifiés
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Boutique AZ Déménagement — cartons et matériel',
+  itemListElement: products.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: p.name,
+      description: p.desc,
+      image: `${company.domain}${p.img}`,
+      brand: { '@type': 'Brand', name: 'AZ Carton Express' },
+      offers: {
+        '@type': 'Offer',
+        price: p.price.toFixed(2),
+        priceCurrency: 'EUR',
+        seller: { '@type': 'Organization', name: company.legalName, vatID: company.vat },
+      },
+    },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} schema={[itemListSchema]}>
+  <Breadcrumbs crumbs={[{ label: 'Boutique', href: '/boutique/' }]} />
+
+  <section class="shop-hero">
+    <div class="container">
+      <span class="kicker">Boutique</span>
+      <h1>Cartons &amp; matériel de déménagement</h1>
+      <p class="shop-intro">
+        Tout le nécessaire pour emballer, protéger et transporter vos affaires&nbsp;:
+        kits de déménagement complets, cartons double cannelure, papier bulle, housses,
+        sangles, chariot et diable. Consultez les prix et commandez par téléphone —
+        nous vous conseillons sur les quantités adaptées à votre volume, et nous livrons
+        ou préparons votre commande à l'enlèvement.
+      </p>
+      <div class="shop-ctas">
+        <a href={company.phoneHref} class="btn btn--primary btn--lg">
+          <Icon name="phone" size={18} />
+          Commander : {company.phoneDisplay}
+        </a>
+        <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--outline btn--lg">
+          Devis gros volume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="shop-toolbar">
+    <div class="container shop-toolbar-inner">
+      <div class="shop-search">
+        <Icon name="box" size={18} />
+        <input
+          type="search"
+          id="shop-q"
+          placeholder="Rechercher un produit (carton, bulle, sangle…)"
+          aria-label="Rechercher un produit"
+        />
+      </div>
+      <div class="shop-chips" role="group" aria-label="Filtrer par catégorie">
+        <button class="shop-chip on" data-cat="all">Tous</button>
+        {productCategories.map((c) => (
+          <button class="shop-chip" data-cat={c.id}>{c.title}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {productCategories.map((c) => (
+    <section class="section shop-section" data-section={c.id}>
+      <div class="container">
+        <h2>{c.title}</h2>
+        <p class="shop-sub">{c.sub}</p>
+        <div class="shop-grid">
+          {products.filter((p) => p.cat === c.id).map((p) => (
+            <article class="shop-card" data-cat={p.cat} data-name={`${p.name} ${p.dims}`.toLowerCase()}>
+              <div class="shop-card-img">
+                {p.badge && <span class="shop-badge">{p.badge}</span>}
+                <img src={p.img} alt={p.alt} loading="lazy" width="800" height="800" />
+              </div>
+              <div class="shop-card-body">
+                <h3>{p.name}</h3>
+                <p class="shop-dims">{p.dims}</p>
+                <p class="shop-price">{fmt(p.price)} <small>TVAC</small></p>
+                <div class="shop-card-btns">
+                  <a class="btn btn--primary" href={company.phoneHref}>
+                    <Icon name="phone" size={16} />
+                    Appeler pour commander
+                  </a>
+                  <button class="btn btn--outline" data-details={p.id}>Voir les détails</button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <p class="shop-no-result container" id="shop-no-result">
+    Aucun produit ne correspond à votre recherche. Essayez un autre mot-clé, ou
+    appelez-nous au <a href={company.phoneHref}>{company.phoneDisplay}</a> — nous avons
+    peut-être ce qu'il vous faut.
+  </p>
+
+  <section class="section section--soft">
+    <div class="container prose">
+      <h2>Le matériel de déménagement, au même endroit que vos déménageurs</h2>
+      <p>
+        Cette boutique est opérée par AZ Carton Express, la marque matériel
+        d'{company.legalName} — la même entreprise que vos
+        <a href="/services/demenagement-bruxelles/">déménageurs à Bruxelles</a>. Vous
+        pouvez acheter votre matériel seul, ou le combiner avec nos
+        <a href="/services/">services de déménagement</a>&nbsp;: dans ce cas, nous
+        apportons directement cartons et protections lors de la préparation. Pour un
+        <a href="/services/emballage-protection/">emballage réalisé par nos équipes</a>,
+        le matériel est compris dans le devis.
+      </p>
+      <p class="shop-note">
+        Tous les prix affichés s'entendent TVA comprise (TVAC). Confirmez le total et la
+        disponibilité par téléphone au moment de la commande.
+      </p>
+    </div>
+  </section>
+
+  <CtaBanner
+    title="Besoin de bras en plus du matériel ?"
+    text="Nos équipes déménagent votre logement ou vos bureaux à Bruxelles, en Belgique et à l'international. Devis gratuit et sans engagement."
+  />
+
+  <!-- Modale détails produit -->
+  <dialog id="shop-modal">
+    <button class="shop-modal-close" aria-label="Fermer">✕</button>
+    <div class="shop-modal-grid" id="shop-modal-content"></div>
+  </dialog>
+</BaseLayout>
+
+<script is:inline define:vars={{ products, tel: company.phoneHref, telDisplay: company.phoneDisplay, quoteUrl: company.quoteUrl }}>
+  // ---------- Modale détails ----------
+  const modal = document.getElementById('shop-modal');
+  const content = document.getElementById('shop-modal-content');
+  const fmt = (p) => p.toFixed(2).replace('.', ',') + ' €';
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-details]');
+    if (btn) {
+      const p = products.find((x) => x.id === btn.dataset.details);
+      content.innerHTML = `
+        <div class="shop-modal-img"><img src="${p.img}" alt="${p.alt}" /></div>
+        <div class="shop-modal-body">
+          <h3>${p.name}</h3>
+          <p class="shop-price">${fmt(p.price)} <small>TVAC</small></p>
+          <p class="shop-modal-desc">${p.desc}</p>
+          <ul>${p.specs.map((s) => `<li>${s}</li>`).join('')}</ul>
+          <div class="shop-modal-btns">
+            <a class="btn btn--primary" href="${tel}">📞 ${telDisplay}</a>
+            <a class="btn btn--dark" href="${quoteUrl}" target="_blank" rel="noopener">Demander un devis</a>
+          </div>
+          ${p.page ? `<p class="shop-modal-link">Plus d'informations : <a href="${p.page}" target="_blank" rel="noopener">fiche produit complète</a></p>` : ''}
+        </div>`;
+      modal.showModal();
+      return;
+    }
+    if (e.target === modal || e.target.closest('.shop-modal-close')) modal.close();
+  });
+
+  // ---------- Recherche + filtres ----------
+  const q = document.getElementById('shop-q');
+  const chips = [...document.querySelectorAll('.shop-chip')];
+  let activeCat = 'all';
+
+  function applyFilters() {
+    const term = q.value.trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('.shop-card').forEach((card) => {
+      const ok =
+        (activeCat === 'all' || card.dataset.cat === activeCat) &&
+        (!term || card.dataset.name.includes(term));
+      card.classList.toggle('shop-hidden', !ok);
+      if (ok) visible++;
+    });
+    document.querySelectorAll('[data-section]').forEach((sec) => {
+      sec.classList.toggle('shop-hidden', !sec.querySelector('.shop-card:not(.shop-hidden)'));
+    });
+    document.getElementById('shop-no-result').style.display = visible ? 'none' : 'block';
+  }
+
+  q.addEventListener('input', applyFilters);
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('on'));
+      chip.classList.add('on');
+      activeCat = chip.dataset.cat;
+      applyFilters();
+    })
+  );
+</script>
+
+<style>
+  .shop-hero {
+    background: linear-gradient(180deg, var(--blue-50), #ffffff);
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(1.6rem, 3vw, 2.4rem);
+  }
+
+  .shop-hero .kicker {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 0.55rem;
+  }
+
+  .shop-intro {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 68ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .shop-ctas { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+  /* ---------- Barre recherche + filtres ---------- */
+  .shop-toolbar {
+    position: sticky;
+    top: 76px;
+    z-index: 40;
+    background: rgb(255 255 255 / 0.95);
+    backdrop-filter: blur(8px);
+    border-block: 1px solid var(--line);
+    padding-block: 0.7rem;
+  }
+
+  .shop-toolbar-inner {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .shop-search {
+    flex: 1 1 240px;
+    position: relative;
+  }
+
+  .shop-search :global(svg) {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    translate: 0 -50%;
+    color: var(--ink-mute);
+  }
+
+  .shop-search input {
+    width: 100%;
+    padding: 0.7rem 1rem 0.7rem 2.7rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    font: inherit;
+    color: var(--ink);
+  }
+
+  .shop-search input:focus {
+    border-color: var(--blue-600);
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(29 78 216 / 0.15);
+  }
+
+  .shop-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .shop-chip {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font: 600 0.86rem var(--font-body);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .shop-chip:hover { border-color: var(--blue-600); color: var(--blue-600); }
+  .shop-chip.on { background: var(--navy-800); border-color: var(--navy-800); color: #fff; }
+
+  /* ---------- Sections & grille ---------- */
+  .shop-section { padding-block: clamp(1.8rem, 4vw, 2.8rem); }
+  .shop-section h2 { margin-bottom: 0.2rem; }
+  .shop-sub { color: var(--ink-soft); margin: 0 0 1.2rem; }
+
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+  }
+
+  @media (max-width: 1020px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 430px)  { .shop-grid { grid-template-columns: 1fr; } }
+
+  .shop-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    position: relative;
+  }
+
+  .shop-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+  .shop-card-img { position: relative; border-bottom: 1px solid var(--line); }
+  .shop-card-img img { aspect-ratio: 1; object-fit: contain; width: 100%; height: auto; }
+
+  .shop-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--amber-500);
+    color: var(--navy-900);
+    font: 700 0.7rem var(--font-body);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .shop-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.9rem 1rem 1rem;
+    flex: 1;
+  }
+
+  .shop-card-body h3 { font-size: 1rem; margin: 0; }
+  .shop-dims { color: var(--ink-mute); font-size: 0.82rem; margin: 0; }
+
+  .shop-price small { font: 600 0.68rem var(--font-body); color: var(--ink-mute); letter-spacing: 0.04em; }
+
+  .shop-price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--navy-800);
+    margin: 0.1rem 0 0.6rem;
+  }
+
+  .shop-card-btns { display: grid; gap: 0.5rem; margin-top: auto; }
+  .shop-card-btns .btn { padding: 0.6rem 0.8rem; font-size: 0.85rem; }
+
+  :global(.shop-hidden) { display: none !important; }
+
+  .shop-no-result {
+    display: none;
+    text-align: center;
+    color: var(--ink-soft);
+    padding: 3rem 1rem;
+  }
+
+  .shop-note { font-size: 0.88rem; color: var(--ink-mute); }
+
+  /* ---------- Modale ---------- */
+  #shop-modal {
+    border: 0;
+    border-radius: 16px;
+    padding: 0;
+    max-width: 720px;
+    width: calc(100% - 32px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  #shop-modal::backdrop { background: rgb(13 31 60 / 0.55); }
+
+  .shop-modal-grid { display: grid; grid-template-columns: 280px 1fr; }
+
+  @media (max-width: 640px) {
+    .shop-modal-grid { grid-template-columns: 1fr; }
+    .shop-modal-grid :global(.shop-modal-img img) { max-height: 230px; }
+  }
+
+  .shop-modal-grid :global(.shop-modal-img) {
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+  }
+
+  .shop-modal-grid :global(.shop-modal-img img) { object-fit: contain; width: 100%; }
+  .shop-modal-grid :global(.shop-modal-body) { padding: 1.5rem 1.6rem; }
+  .shop-modal-grid :global(.shop-modal-body h3) { margin: 0 0 0.2rem; }
+  .shop-modal-grid :global(.shop-modal-desc) { color: var(--ink-soft); font-size: 0.95rem; }
+
+  .shop-modal-grid :global(.shop-modal-body ul) {
+    padding-left: 1.2rem;
+    margin: 0.6rem 0 1rem;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .shop-modal-grid :global(.shop-modal-btns) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .shop-modal-grid :global(.shop-modal-btns .btn) { padding: 0.65rem 0.6rem; font-size: 0.88rem; }
+  .shop-modal-grid :global(.shop-modal-link) { font-size: 0.85rem; margin: 0.8rem 0 0; }
+
+  .shop-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--bg-soft);
+    color: var(--ink);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1080px) {
+    .shop-toolbar { top: 0; }
+  }
+</style>

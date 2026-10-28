@@ -1,0 +1,61 @@
+---
+// Tracking des actions commerciales → window.dataLayer (lu par GTM / GA4).
+// Événements : phone_click, email_click, quote_cta_click.
+// (quote_request / contact_form_submit sont envoyés par la page /contactus-thank-you/,
+//  cible de redirection du formulaire Odoo après envoi réussi.)
+// Aucune donnée personnelle n'est transmise : uniquement des infos techniques.
+---
+
+<script>
+  const w = window as any;
+  w.dataLayer = w.dataLayer || [];
+
+  const push = (data: Record<string, unknown>) => {
+    w.dataLayer.push({ ...data, page_path: window.location.pathname });
+  };
+
+  /** Emplacement lisible du CTA, pour savoir quel bouton convertit le mieux. */
+  const locationOf = (el: Element): string => {
+    if (el.closest('.sticky-bar')) return 'sticky_mobile_bar';
+    if (el.closest('.mobile-menu')) return 'mobile_menu';
+    if (el.closest('header')) return 'header';
+    if (el.closest('footer')) return 'footer';
+    if (el.closest('.cta-banner')) return 'cta_banner';
+    if (el.closest('.quote-cta')) return 'quote_block';
+    if (el.closest('#devis')) return 'home_quote_section';
+    if (el.closest('.hero, .service-hero, .services-hero, .zones-hero')) return 'hero';
+    if (el.closest('.not-found')) return 'page_404';
+    if (el.closest('.cc')) return 'cookie_banner';
+    return 'content';
+  };
+
+  const isQuoteCta = (a: HTMLAnchorElement): boolean => {
+    const href = a.getAttribute('href') || '';
+    const text = (a.textContent || '').trim();
+    const target = href.includes('/contact/') || href.includes('odoo.com');
+    return target && /devis|planifier/i.test(text);
+  };
+
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest<HTMLAnchorElement>('a[href]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+
+    if (href.startsWith('tel:')) {
+      push({ event: 'phone_click', cta_location: locationOf(a) });
+      return;
+    }
+    if (href.startsWith('mailto:')) {
+      push({ event: 'email_click', cta_location: locationOf(a) });
+      return;
+    }
+    if (isQuoteCta(a)) {
+      push({
+        event: 'quote_cta_click',
+        cta_text: (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60),
+        cta_location: locationOf(a),
+        cta_destination: href.includes('odoo.com') ? 'odoo_form' : 'contact_page',
+      });
+    }
+  });
+</script>

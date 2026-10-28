@@ -1,0 +1,95 @@
+---
+// Page de confirmation après envoi RÉUSSI du formulaire de devis (Odoo).
+// À configurer dans Odoo : Site Web → formulaire → « Action après envoi »
+// → Rediriger vers https://az-demenagement.be/contactus-thank-you
+// (/merci/ est une copie de cette page, conservée comme adresse alternative.)
+// C'est ici — et uniquement ici — que sont envoyés quote_request et
+// contact_form_submit dans dataLayer (jamais au simple clic sur un bouton).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { company } from '../data/company';
+
+const title = 'Merci — Votre demande de devis a bien été envoyée | AZ Déménagement';
+const description =
+  "Votre demande de devis de déménagement a bien été reçue. Nous revenons vers vous rapidement.";
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <section class="section merci">
+    <div class="container text-center">
+      <span class="merci-icon"><Icon name="check-circle" size={38} /></span>
+      <h1>Merci, votre demande a bien été envoyée&nbsp;!</h1>
+      <p class="merci-text">
+        Nous avons bien reçu votre demande de devis. Un membre de notre équipe l'analyse
+        et revient vers vous dans les plus brefs délais avec une offre claire, détaillée
+        et sans engagement.
+      </p>
+      <p class="merci-text">
+        Une question urgente&nbsp;? Appelez-nous directement au
+        <a href={company.phoneHref}><strong>{company.phoneDisplay}</strong></a>.
+      </p>
+      <div class="merci-actions">
+        <a href="/" class="btn btn--primary btn--lg">
+          Retour à l'accueil
+          <Icon name="home" size={18} />
+        </a>
+        <a href="/services/" class="btn btn--outline btn--lg">Découvrir nos services</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .merci { padding-block: clamp(4rem, 10vw, 7rem); }
+
+  .merci-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 22px;
+    background: #ecfdf3;
+    color: var(--success);
+    margin-bottom: 1.2rem;
+  }
+
+  .merci-text {
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0 auto 1rem;
+  }
+
+  .merci-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 1.6rem;
+  }
+</style>
+
+<script>
+  // Conversion principale : envoyée une seule fois par demande.
+  // Garde-fou : un rechargement de la page dans les 30 minutes ne renvoie pas
+  // la conversion (évite les doublons Google Ads / GA4).
+  const w = window as any;
+  w.dataLayer = w.dataLayer || [];
+  const KEY = 'az_quote_request_sent_at';
+  const now = Date.now();
+  let last = 0;
+  try { last = Number(sessionStorage.getItem(KEY) || 0); } catch {}
+
+  if (now - last > 30 * 60 * 1000) {
+    try { sessionStorage.setItem(KEY, String(now)); } catch {}
+    w.dataLayer.push({
+      event: 'quote_request',
+      form_type: 'moving_quote',
+      page_path: window.location.pathname,
+    });
+    w.dataLayer.push({
+      event: 'contact_form_submit',
+      page_path: window.location.pathname,
+    });
+  }
+</script>

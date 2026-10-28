@@ -1,0 +1,640 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Faq from '../components/Faq.astro';
+import QuoteCta from '../components/QuoteCta.astro';
+import { company, communes } from '../data/company';
+import { services } from '../data/services';
+import { faqHome } from '../data/faq';
+
+import heroImg from '../assets/images/equipe-demenageurs-chargement.jpg';
+import bruxellesImg from '../assets/images/demenageur-cartons-fragile-camion.jpg';
+import intlImg from '../assets/images/chargement-camion-demenagement.jpg';
+import planImg from '../assets/images/camion-itineraire-demenagement.jpg';
+import boutiqueImg from '../assets/images/fermeture-carton-demenagement.jpg';
+
+const title = 'Déménagement Bruxelles — Déménageur en Belgique & international | AZ Déménagement';
+const description =
+  "Entreprise de déménagement à Bruxelles : particuliers, entreprises, transport de meubles, emballage et déménagement international. Devis gratuit au 0471 / 65 39 47.";
+
+const steps = [
+  {
+    icon: 'file',
+    title: '1. Demande de devis',
+    text: "Décrivez votre déménagement via le formulaire en ligne ou par téléphone : adresses, volume, date souhaitée. Vous recevez rapidement un devis gratuit et détaillé.",
+  },
+  {
+    icon: 'calendar',
+    title: '2. Planification',
+    text: "Nous fixons ensemble la date et l'organisation : équipe, camion, matériel d'emballage, réservation du stationnement si nécessaire. Tout est anticipé.",
+  },
+  {
+    icon: 'truck',
+    title: '3. Jour du déménagement',
+    text: "Notre équipe protège votre mobilier, démonte les meubles convenus, charge le camion avec méthode et transporte vos biens en toute sécurité.",
+  },
+  {
+    icon: 'home',
+    title: '4. Installation',
+    text: "À l'arrivée, nous déchargeons, remontons vos meubles et plaçons chaque carton dans la bonne pièce. Vous démarrez votre nouvelle vie sans stress.",
+  },
+];
+
+const advantages = [
+  {
+    icon: 'euro',
+    title: 'Devis gratuit et transparent',
+    text: "Une estimation claire, détaillée poste par poste, sans frais cachés et sans engagement.",
+  },
+  {
+    icon: 'pin',
+    title: 'Bruxelles et toute la Belgique',
+    text: "Nous intervenons dans les 19 communes bruxelloises et dans tout le pays, jusqu'à l'international.",
+  },
+  {
+    icon: 'shield',
+    title: 'Mobilier protégé',
+    text: "Couvertures, film étirable, cartons renforcés : vos biens sont emballés et manipulés avec soin.",
+  },
+  {
+    icon: 'users',
+    title: 'Équipe professionnelle',
+    text: "Des déménageurs expérimentés, ponctuels et efficaces, pour les particuliers comme pour les entreprises.",
+  },
+  {
+    icon: 'clock',
+    title: 'Disponibilité et réactivité',
+    text: "Réponse rapide à chaque demande, et des solutions même pour les déménagements à organiser vite.",
+  },
+  {
+    icon: 'heart',
+    title: 'Accompagnement personnalisé',
+    text: "Un interlocuteur unique qui suit votre dossier du premier appel jusqu'au dernier carton posé.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="hero-kicker">
+          <Icon name="pin" size={16} />
+          Entreprise de déménagement — Bruxelles, Belgique &amp; Europe
+        </p>
+        <h1>Déménagement à Bruxelles et à l'international</h1>
+        <p class="hero-sub">
+          AZ Déménagement vous accompagne pour votre déménagement à Bruxelles, partout en
+          Belgique et à l'étranger. Particuliers et entreprises, avec emballage, montage
+          des meubles et transport sécurisé.
+        </p>
+        <div class="hero-ctas">
+          <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+            Demander un devis gratuit
+            <Icon name="arrow" size={18} />
+          </a>
+          <a href={company.phoneHref} class="btn btn--dark btn--lg">
+            <Icon name="phone" size={18} />
+            Appeler maintenant
+          </a>
+        </div>
+        <ul class="hero-points">
+          <li><Icon name="check-circle" size={18} /> Devis gratuit sous 24 à 48 h ouvrables</li>
+          <li><Icon name="check-circle" size={18} /> Les 19 communes de Bruxelles</li>
+          <li><Icon name="check-circle" size={18} /> Déménagements internationaux en Europe</li>
+        </ul>
+      </div>
+      <div class="hero-media">
+        <Image
+          src={heroImg}
+          alt="Équipe de déménageurs professionnels en uniforme chargeant des cartons dans le camion de déménagement"
+          width={720}
+          densities={[1, 2]}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOUTIQUE ============ -->
+  <section class="section section--soft">
+    <div class="container boutique-grid">
+      <div class="boutique-media">
+        <Image
+          src={boutiqueImg}
+          alt="Fermeture d'un carton de déménagement au ruban adhésif"
+          width={640}
+          densities={[1, 2]}
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <span class="kicker">Boutique</span>
+        <h2>Cartons et matériel de déménagement en vente directe</h2>
+        <p>
+          Kits de déménagement complets à partir de 34,99&nbsp;€, cartons double
+          cannelure, papier bulle, housses matelas, sangles, chariot et diable&nbsp;:
+          achetez votre matériel au prix juste, avec les conseils de vrais déménageurs
+          sur les quantités adaptées à votre volume.
+        </p>
+        <ul class="boutique-points">
+          <li><Icon name="check-circle" size={18} /> Kits complets pour studio, appartement et maison</li>
+          <li><Icon name="check-circle" size={18} /> Cartons renforcés vendus à l'unité</li>
+          <li><Icon name="check-circle" size={18} /> Commande simple par téléphone</li>
+        </ul>
+        <a href="/boutique/" class="btn btn--primary">
+          Découvrir la boutique
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Nos services</span>
+        <h2>Des services de déménagement complets, à la carte</h2>
+        <p>
+          Du studio au siège d'entreprise, du centre de Bruxelles à l'autre bout de
+          l'Europe : choisissez la formule qui correspond à votre projet.
+        </p>
+      </div>
+      <div class="grid grid--4">
+        {services.map((s) => (
+          <ServiceCard service={s} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AVANTAGES ============ -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Pourquoi nous choisir</span>
+        <h2>Un déménagement sans stress, du premier carton au dernier</h2>
+        <p>
+          Déménager est une étape importante. Notre mission : la rendre simple,
+          organisée et sereine.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {advantages.map((a) => (
+          <div class="advantage card">
+            <span class="advantage-icon"><Icon name={a.icon} size={24} /></span>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ZONES ============ -->
+  <section class="section">
+    <div class="container zones-grid">
+      <div>
+        <span class="kicker">Zones desservies</span>
+        <h2>Déménageur actif dans toute la Région bruxelloise</h2>
+        <p>
+          Basés boulevard du Midi, au cœur de Bruxelles, nous déménageons chaque semaine
+          dans l'ensemble des communes de la capitale&nbsp;:
+        </p>
+        <ul class="communes-list">
+          {communes.map((c) => (
+            <li><Icon name="check" size={14} /> {c}</li>
+          ))}
+        </ul>
+        <p>
+          Nous intervenons également partout en Belgique — Brabant wallon et flamand,
+          Anvers, Gand, Liège, Namur, Charleroi, Mons, la côte — ainsi qu'à
+          l'international. <a href="/zones-intervention/">Découvrez nos zones d'intervention en détail</a>.
+        </p>
+      </div>
+      <div class="zones-media">
+        <Image
+          src={bruxellesImg}
+          alt="Déménageur chargeant des cartons marqués fragile dans la camionnette avec un diable"
+          width={640}
+          densities={[1, 2]}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTERNATIONAL ============ -->
+  <section class="section section--navy">
+    <div class="container intl-grid">
+      <div class="intl-media">
+        <Image
+          src={intlImg}
+          alt="Grande camionnette de déménagement chargée pour un trajet international"
+          width={640}
+          densities={[1, 2]}
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <span class="kicker">Déménagement international</span>
+        <h2>De Bruxelles vers toute l'Europe, de porte à porte</h2>
+        <p>
+          Nouvelle vie à Paris, Amsterdam, Berlin, Madrid ou Lisbonne&nbsp;? Nous
+          organisons votre déménagement international de A à Z&nbsp;: emballage renforcé,
+          démontage des meubles, chargement sécurisé, transport routier et livraison à
+          votre nouvelle adresse, avec remontage et installation.
+        </p>
+        <ul class="intl-points">
+          <li><Icon name="check-circle" size={18} /> France, Pays-Bas, Allemagne, Luxembourg</li>
+          <li><Icon name="check-circle" size={18} /> Espagne, Portugal, Italie, Suisse et plus</li>
+          <li><Icon name="check-circle" size={18} /> Un interlocuteur unique du départ à la livraison</li>
+        </ul>
+        <a href="/demenagement-international/" class="btn btn--primary">
+          Découvrir le déménagement international
+          <Icon name="arrow" size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Comment ça marche</span>
+        <h2>Votre déménagement en 4 étapes simples</h2>
+        <p>
+          Une organisation éprouvée qui vous libère de la charge mentale du déménagement.
+        </p>
+      </div>
+      <div class="process-grid">
+        <div class="grid grid--2 process-steps">
+          {steps.map((s) => (
+            <div class="step card">
+              <span class="step-icon"><Icon name={s.icon} size={24} /></span>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+          ))}
+        </div>
+        <div class="process-media">
+          <Image
+            src={planImg}
+            alt="Camion de déménagement chargé et itinéraire tracé d'un point A vers un point B sur un plan"
+            width={520}
+            densities={[1, 2]}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section section--soft" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Questions fréquentes</span>
+        <h2>Tout savoir avant de déménager à Bruxelles</h2>
+        <p>
+          Prix, délais, préparation, communes desservies&nbsp;: les réponses aux questions
+          que l'on nous pose le plus souvent.
+        </p>
+      </div>
+      <Faq items={faqHome} withSchema={true} />
+    </div>
+  </section>
+
+  <!-- ============ CONTACT / DEVIS ============ -->
+  <section class="section" id="devis">
+    <div class="container devis-grid">
+      <div class="devis-intro">
+        <span class="kicker">Devis gratuit</span>
+        <h2>Recevez votre devis de déménagement</h2>
+        <p>
+          Demandez votre devis en ligne et recevez une offre personnalisée, gratuite et
+          sans engagement. Vous préférez en parler de vive voix&nbsp;? Appelez-nous, nous
+          nous ferons un plaisir de vous conseiller.
+        </p>
+        <div class="devis-contact card">
+          <p>
+            <Icon name="phone" size={20} />
+            <a href={company.phoneHref}><strong>{company.phoneDisplay}</strong></a>
+          </p>
+          <p>
+            <Icon name="mail" size={20} />
+            <a href={`mailto:${company.email}`}>{company.email}</a>
+          </p>
+          <p>
+            <Icon name="pin" size={20} />
+            <span>
+              {company.legalName}<br />
+              {company.address.street}, {company.address.postalCode} {company.address.city}
+            </span>
+          </p>
+          <p>
+            <Icon name="clock" size={20} />
+            <span>
+              {company.openingHours[0].days} : {company.openingHours[0].hours}<br />
+              {company.openingHours[1].days} : {company.openingHours[1].hours.toLowerCase()}
+            </span>
+          </p>
+        </div>
+      </div>
+      <QuoteCta />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    background:
+      radial-gradient(900px 500px at 90% -10%, rgb(29 78 216 / 0.10), transparent),
+      linear-gradient(180deg, var(--blue-50), #ffffff 85%);
+    padding: clamp(2.5rem, 6vw, 5rem) 0;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--navy-700);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.3rem;
+  }
+
+  .hero-kicker :global(svg) { color: var(--amber-600); }
+
+  .hero h1 { margin-bottom: 0.7rem; }
+
+  .hero-sub {
+    font-size: 1.16rem;
+    color: var(--ink-soft);
+    max-width: 54ch;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .hero-points li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+  }
+
+  .hero-points :global(svg) { color: var(--success); flex-shrink: 0; }
+
+  .hero-media :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---------- Avantages ---------- */
+  .advantage-icon,
+  .step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    background: var(--amber-100);
+    color: var(--amber-600);
+    margin-bottom: 1rem;
+  }
+
+  .advantage h3, .step h3 { font-size: 1.12rem; }
+
+  .advantage p, .step p {
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+    margin: 0;
+  }
+
+  /* ---------- Zones ---------- */
+  .zones-grid, .intl-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .zones-grid .kicker, .intl-grid .kicker {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 0.55rem;
+  }
+
+  .intl-grid .kicker { color: var(--amber-500); }
+
+  .communes-list {
+    list-style: none;
+    margin: 0 0 1.2rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.35rem 1rem;
+  }
+
+  .communes-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .communes-list :global(svg) { color: var(--success); flex-shrink: 0; }
+
+  .zones-media :global(img),
+  .intl-media :global(img),
+  .process-media :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---------- International ---------- */
+  .intl-grid > div:last-child p { color: #c3cfe2; }
+
+  .intl-points {
+    list-style: none;
+    margin: 0 0 1.6rem;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .intl-points li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+  }
+
+  .intl-points :global(svg) { color: var(--amber-500); flex-shrink: 0; }
+
+  /* ---------- Boutique ---------- */
+  .boutique-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .boutique-grid .kicker {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 0.55rem;
+  }
+
+  .boutique-media :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .boutique-points {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .boutique-points li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 600;
+    font-size: 0.97rem;
+    color: var(--ink-soft);
+  }
+
+  .boutique-points :global(svg) { color: var(--success); flex-shrink: 0; }
+
+  /* ---------- Process ---------- */
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .process-media :global(img) { aspect-ratio: 3 / 4; }
+
+  /* ---------- Devis ---------- */
+  .devis-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: start;
+  }
+
+  .devis-intro .kicker {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    margin-bottom: 0.55rem;
+  }
+
+  .devis-contact {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 1.6rem;
+  }
+
+  .devis-contact p {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin: 0;
+  }
+
+  .devis-contact :global(svg) {
+    color: var(--blue-600);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .devis-contact a {
+    color: var(--navy-800);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .devis-contact a:hover { color: var(--blue-600); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero-inner, .zones-grid, .intl-grid, .devis-grid, .process-grid, .boutique-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-media { order: -1; }
+
+    .hero-media :global(img) { aspect-ratio: 16 / 9; }
+
+    .intl-media { order: 1; }
+
+    .process-media { display: none; }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { company } from '../data/company';
+
+const title = 'Page introuvable (404) | AZ Déménagement';
+const description =
+  "La page que vous cherchez a peut-être déménagé. Retrouvez nos services de déménagement à Bruxelles, en Belgique et à l'international.";
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <section class="section not-found">
+    <div class="container text-center">
+      <p class="code">404</p>
+      <h1>Cette page a déménagé sans laisser d'adresse</h1>
+      <p class="nf-text">
+        Ça arrive même aux meilleurs. La page que vous cherchez n'existe pas ou plus,
+        mais tout le reste est bien en place&nbsp;:
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn--primary btn--lg">
+          Retour à l'accueil
+          <Icon name="home" size={18} />
+        </a>
+        <a href="/services/" class="btn btn--outline btn--lg">Voir nos services</a>
+        <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--outline btn--lg">Demander un devis</a>
+      </div>
+      <p class="nf-help">
+        Besoin d'aide immédiate&nbsp;? Appelez-nous au
+        <a href={company.phoneHref}>{company.phoneDisplay}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { padding-block: clamp(4rem, 10vw, 8rem); }
+
+  .code {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--blue-100);
+    margin: 0 0 0.5rem;
+  }
+
+  .nf-text {
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 auto 2rem;
+  }
+
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .nf-help { color: var(--ink-soft); }
+</style>

@@ -1,0 +1,165 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+import Icon from '../../components/Icon.astro';
+import { services } from '../../data/services';
+import { company } from '../../data/company';
+import cartonsImg from '../../assets/images/cartons-demenagement-piece.jpg';
+
+const title = 'Services de déménagement à Bruxelles & en Belgique | AZ Déménagement';
+const description =
+  "Découvrez tous les services d'AZ Déménagement : déménagement à Bruxelles et en Belgique, international, particuliers, entreprises, transport de meubles, emballage et montage.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs crumbs={[{ label: 'Services', href: '/services/' }]} />
+
+  <section class="services-hero">
+    <div class="container services-hero-inner">
+      <div>
+        <h1>Nos services de déménagement</h1>
+        <p class="services-intro">
+          AZ Déménagement propose une gamme complète de services pour les particuliers et
+          les entreprises&nbsp;: déménagement complet, transport de meubles, chargement et
+          déchargement, emballage, montage et démontage du mobilier. À Bruxelles, partout
+          en Belgique et à l'international, nous composons avec vous la formule qui
+          correspond à votre projet et à votre budget.
+        </p>
+        <div class="services-ctas">
+          <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+            Demander un devis gratuit
+            <Icon name="arrow" size={18} />
+          </a>
+          <a href={company.phoneHref} class="btn btn--outline btn--lg">
+            <Icon name="phone" size={18} />
+            {company.phoneDisplay}
+          </a>
+        </div>
+      </div>
+      <div class="services-media">
+        <Image
+          src={cartonsImg}
+          alt="Cartons de déménagement empilés dans une pièce lumineuse"
+          width={640}
+          densities={[1, 2]}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Tous nos services</span>
+        <h2>Choisissez la formule adaptée à votre déménagement</h2>
+        <p>
+          Chaque projet est différent. Cliquez sur un service pour découvrir en détail
+          comment nous travaillons.
+        </p>
+      </div>
+      <div class="grid grid--4">
+        {services.map((s) => (
+          <ServiceCard service={s} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container formules">
+      <div class="section-head">
+        <span class="kicker">À la carte</span>
+        <h2>Du simple transport au déménagement clé en main</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3>Formule économique</h3>
+          <p>
+            Vous emballez vos affaires, nous nous chargeons du reste&nbsp;: transport,
+            chargement et déchargement par des professionnels. Idéal pour les petits
+            budgets et les petits volumes.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Formule standard</h3>
+          <p>
+            Nous fournissons le matériel d'emballage, démontons et remontons vos meubles,
+            et assurons le transport de bout en bout. Le meilleur équilibre entre confort
+            et budget.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Formule clé en main</h3>
+          <p>
+            Notre équipe emballe l'ensemble de votre logement, y compris la vaisselle et
+            les objets fragiles, puis installe tout dans votre nouveau chez-vous. Zéro
+            stress, zéro carton à faire.
+          </p>
+        </div>
+      </div>
+      <p class="formules-note">
+        Ces formules sont données à titre indicatif&nbsp;: chaque devis est construit sur
+        mesure selon votre volume, votre trajet et vos besoins réels.
+        <a href={company.quoteUrl} target="_blank" rel="noopener">Décrivez-nous votre projet</a> pour recevoir une offre précise.
+      </p>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>
+
+<style>
+  .services-hero {
+    background: linear-gradient(180deg, var(--blue-50), #ffffff);
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+
+  .services-hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+
+  .services-intro {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.6rem;
+  }
+
+  .services-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .services-media :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .formules .card h3 { color: var(--blue-600); }
+
+  .formules .card p { margin: 0; color: var(--ink-soft); }
+
+  .formules-note {
+    margin-top: 1.6rem;
+    color: var(--ink-soft);
+    max-width: 70ch;
+  }
+
+  @media (max-width: 900px) {
+    .services-hero-inner { grid-template-columns: 1fr; }
+    .services-media { order: -1; }
+    .services-media :global(img) { aspect-ratio: 16 / 9; }
+  }
+</style>

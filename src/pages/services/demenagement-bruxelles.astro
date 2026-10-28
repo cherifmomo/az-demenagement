@@ -1,0 +1,221 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { company } from '../../data/company';
+import img from '../../assets/images/chargement-cartons-camionnette.jpg';
+
+const faq = [
+  {
+    question: 'Intervenez-vous dans les rues difficiles d’accès du centre de Bruxelles ?',
+    answer:
+      "Oui. Rues étroites, zones piétonnes, absence d'ascenseur : nous connaissons bien les contraintes du centre-ville et des quartiers anciens. Selon la situation, nous utilisons un véhicule adapté, un lift de déménagement ou une organisation spécifique du portage. Ces éléments sont anticipés dès le devis pour éviter toute surprise le jour J.",
+  },
+  {
+    question: 'Vous occupez-vous de la réservation du stationnement pour le camion ?',
+    answer:
+      "Oui, nous pouvons nous charger des démarches de réservation d'emplacement (panneaux d'interdiction de stationner) auprès de la commune concernée, à Bruxelles-Ville comme dans les autres communes de la Région. C'est un point essentiel pour un déménagement fluide : signalez-le simplement lors de votre demande de devis.",
+  },
+  {
+    question: 'Faites-vous les petits déménagements (studio, kot, chambre) ?',
+    answer:
+      "Absolument. Aucun volume n'est trop petit : studio, kot étudiant, transport de quelques meubles d'un quartier à l'autre. Nous adaptons l'équipe et le véhicule au volume réel, ce qui vous garantit un prix juste.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Déménagement Bruxelles — Déménageur dans les 19 communes | AZ Déménagement"
+  description="Entreprise de déménagement à Bruxelles : appartements, maisons et bureaux dans les 19 communes. Équipe locale, mobilier protégé, devis gratuit au 0471 / 65 39 47."
+  h1="Déménagement à Bruxelles"
+  intro="Vous déménagez dans la capitale ? AZ Déménagement est une entreprise bruxelloise, basée boulevard du Midi, qui déménage chaque semaine appartements, maisons et bureaux dans les 19 communes. Une équipe locale qui connaît la ville, ses rues étroites et ses immeubles sans ascenseur."
+  image={img}
+  imageAlt="Déménageur chargeant des cartons dans une camionnette de déménagement à Bruxelles"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Déménagement Bruxelles', href: '/services/demenagement-bruxelles/' },
+  ]}
+  serviceName="Déménagement à Bruxelles"
+  areaServed="Région de Bruxelles-Capitale"
+  faq={faq}
+  faqTitle="Vos questions sur le déménagement à Bruxelles"
+  ctaTitle="Votre déménagement à Bruxelles commence ici"
+>
+  <!-- Prix d'appel + accroche, immédiatement sous le H1 -->
+  <div slot="after-h1" class="price-block">
+    <p class="price-tag">Déménagement à partir de <strong>150&nbsp;€</strong></p>
+    <p class="price-sub">
+      «&nbsp;Demandez votre devis gratuit et personnalisé pour votre déménagement à
+      Bruxelles et dans les environs.&nbsp;»
+    </p>
+  </div>
+
+  <!-- Bloc de réassurance, juste après le hero -->
+  <section slot="after-hero" class="reassurance" aria-label="Nos garanties">
+    <div class="container">
+      <div class="grid grid--4">
+        <div class="reassurance-item">
+          <span class="reassurance-icon"><Icon name="pin" size={24} /></span>
+          <h2>19 communes de Bruxelles</h2>
+          <p>Nous intervenons dans toute la Région de Bruxelles-Capitale.</p>
+        </div>
+        <div class="reassurance-item">
+          <span class="reassurance-icon"><Icon name="file" size={24} /></span>
+          <h2>Devis gratuit</h2>
+          <p>Détaillé et sans engagement.</p>
+        </div>
+        <div class="reassurance-item">
+          <span class="reassurance-icon"><Icon name="phone" size={24} /></span>
+          <h2>Contact téléphonique direct</h2>
+          <p><a href={company.phoneHref}>0471 / 65 39 47</a></p>
+        </div>
+        <div class="reassurance-item">
+          <span class="reassurance-icon"><Icon name="home" size={24} /></span>
+          <h2>Entreprise basée à Bruxelles</h2>
+          <p>Intervention à Bruxelles et dans les environs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2>Un déménageur qui connaît vraiment Bruxelles</h2>
+  <p>
+    Déménager à Bruxelles ne s'improvise pas&nbsp;: circulation dense, stationnement
+    réglementé, immeubles anciens aux escaliers étroits, zones piétonnes… Notre force,
+    c'est notre connaissance du terrain. Nous savons comment accéder à un immeuble de la
+    rue Antoine Dansaert, organiser un lift avenue Louise ou réserver un emplacement de
+    stationnement à Schaerbeek. Cette expérience locale se traduit par un déménagement
+    plus rapide, mieux organisé — et donc plus économique.
+  </p>
+
+  <h2>Ce que comprend notre service de déménagement à Bruxelles</h2>
+  <ul class="check-list">
+    <li><strong>Transport sécurisé</strong> de tous vos biens dans un véhicule adapté au volume et à l'accès.</li>
+    <li><strong>Chargement et déchargement</strong> par des déménageurs professionnels, avec sangles et matériel de portage.</li>
+    <li><strong>Protection du mobilier</strong> : couvertures de déménagement, film étirable, housses pour matelas et canapés.</li>
+    <li><strong>Démontage et remontage des meubles</strong> si vous le souhaitez — <a href="/services/montage-demontage-meubles/">en savoir plus</a>.</li>
+    <li><strong>Fourniture de cartons</strong> et matériel d'emballage — <a href="/services/emballage-protection/">découvrir le service emballage</a>.</li>
+    <li><strong>Réservation du stationnement</strong> auprès de votre commune, à la demande.</li>
+  </ul>
+
+  <h2>Dans quelles communes intervenons-nous&nbsp;?</h2>
+  <p>
+    Partout dans la Région de Bruxelles-Capitale&nbsp;: Bruxelles-Ville, Anderlecht,
+    Schaerbeek, Ixelles, Uccle, Saint-Gilles, Etterbeek, Molenbeek-Saint-Jean, Forest,
+    Jette, Evere, Woluwe-Saint-Pierre, Woluwe-Saint-Lambert, Auderghem,
+    Watermael-Boitsfort, Koekelberg, Ganshoren, Berchem-Sainte-Agathe et
+    Saint-Josse-ten-Noode. Consultez notre page
+    <a href="/zones-intervention/">zones d'intervention</a> pour plus de détails sur
+    chaque commune, ou notre page
+    <a href="/services/demenagement-belgique/">déménagement en Belgique</a> si votre
+    trajet sort de la capitale.
+  </p>
+
+  <h2>Appartement, maison, studio ou bureau</h2>
+  <div class="two-col">
+    <div>
+      <h3>Logements privés</h3>
+      <p>
+        Du studio au 4 façades, nous adaptons l'équipe, le camion et le matériel à votre
+        volume. Étage élevé sans ascenseur&nbsp;? Le recours à un lift de déménagement est
+        étudié dès le devis. Notre service
+        <a href="/services/demenagement-particuliers/">déménagement particuliers</a>
+        couvre l'ensemble de vos besoins, de l'emballage à l'installation.
+      </p>
+    </div>
+    <div>
+      <h3>Entreprises et commerces</h3>
+      <p>
+        Transfert de bureaux, de cabinet ou de commerce dans Bruxelles&nbsp;: nous
+        travaillons vite et proprement, y compris en dehors des heures d'ouverture, pour
+        limiter l'impact sur votre activité. Voir notre page
+        <a href="/services/demenagement-entreprises/">déménagement d'entreprises et de bureaux</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <p>
+      <strong>Bon à savoir&nbsp;:</strong> à Bruxelles, la réservation d'un emplacement de
+      stationnement pour le camion de déménagement doit généralement être demandée
+      plusieurs jours ouvrables à l'avance auprès de la commune. Parlez-en dès votre
+      demande de devis&nbsp;: nous pouvons faire la démarche pour vous.
+    </p>
+  </div>
+</ServiceLayout>
+
+<style>
+  /* ---- Prix d'appel sous le H1 ---- */
+  .price-block { margin: -0.2rem 0 1.1rem; }
+
+  .price-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--navy-800);
+    background: var(--amber-100);
+    border: 1px solid var(--amber-500);
+    border-radius: 999px;
+    padding: 0.35rem 1.1rem;
+    margin: 0 0 0.6rem;
+  }
+
+  .price-tag strong { color: var(--accent-text); }
+
+  .price-sub {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  /* ---- Bloc de réassurance après le hero ---- */
+  .reassurance {
+    background: var(--bg-soft);
+    border-block: 1px solid var(--line);
+    padding-block: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .reassurance-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.4rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .reassurance-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--blue-50);
+    color: var(--blue-600);
+    margin-bottom: 0.7rem;
+  }
+
+  .reassurance-item h2 {
+    font-size: 1.05rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .reassurance-item p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .reassurance-item a {
+    font-weight: 700;
+    color: var(--navy-800);
+    text-decoration: none;
+  }
+
+  .reassurance-item a:hover { color: var(--blue-600); text-decoration: underline; }
+</style>

@@ -1,0 +1,68 @@
+---
+// Bandeau d'appel à l'action réutilisable en fin de page.
+import Icon from './Icon.astro';
+import { company } from '../data/company';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Prêt à planifier votre déménagement ?',
+  text = "Recevez un devis gratuit et détaillé, sans engagement. Réponse rapide par téléphone ou par e-mail.",
+} = Astro.props;
+---
+
+<section class="cta-banner">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-actions">
+      <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+        Demander un devis gratuit
+        <Icon name="arrow" size={18} />
+      </a>
+      <a href={company.phoneHref} class="btn btn--outline-light btn--lg">
+        <Icon name="phone" size={18} />
+        {company.phoneDisplay}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    background:
+      radial-gradient(1000px 400px at 85% -20%, rgb(29 78 216 / 0.5), transparent),
+      linear-gradient(160deg, var(--navy-900), var(--navy-800));
+    color: #e7edf7;
+    padding: clamp(3rem, 6vw, 4.5rem) 0;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-text { max-width: 560px; }
+
+  .cta-text h2 { color: #ffffff; margin-bottom: 0.5rem; }
+
+  .cta-text p { margin: 0; color: #c3cfe2; font-size: 1.08rem; }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .cta-actions { width: 100%; flex-direction: column; align-items: stretch; }
+  }
+</style>

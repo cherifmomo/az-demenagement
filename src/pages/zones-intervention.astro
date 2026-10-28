@@ -1,0 +1,254 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { company } from '../data/company';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Icon from '../components/Icon.astro';
+import img from '../assets/images/camionnette-demenagement-bruxelles.jpg';
+
+const title = "Zones d'intervention — Déménagement dans les 19 communes de Bruxelles | AZ Déménagement";
+const description =
+  "AZ Déménagement intervient dans toutes les communes de Bruxelles : Anderlecht, Schaerbeek, Ixelles, Uccle, Molenbeek, Woluwe… ainsi que partout en Belgique et en Europe.";
+
+// Chaque commune a une description spécifique et concrète — pas de contenu dupliqué.
+const zones = [
+  {
+    name: 'Bruxelles-Ville',
+    text: "Cœur historique, quartier Dansaert, Sablon, Laeken ou Neder-Over-Heembeek : nous composons avec les zones piétonnes, les rues pavées et les immeubles anciens du centre. La réservation du stationnement y est quasi indispensable — nous nous en chargeons.",
+  },
+  {
+    name: 'Anderlecht',
+    text: "Du quartier de la Vaillance aux nouvelles constructions du canal, Anderlecht mêle maisons ouvrières et grands ensembles. Nos équipes y déménagent régulièrement familles et commerces, avec des solutions pour les rues commerçantes très fréquentées.",
+  },
+  {
+    name: 'Schaerbeek',
+    text: "Ses belles maisons de maître aux escaliers étroits et hauts plafonds font le charme de Schaerbeek — et le défi de ses déménagements. Le lift extérieur y est souvent la meilleure option : nous l'anticipons dès le devis.",
+  },
+  {
+    name: 'Ixelles',
+    text: "Flagey, Châtelain, Matongé, cimetière d'Ixelles : des quartiers vivants où le stationnement est rare et les étages sans ascenseur nombreux. Une organisation millimétrée fait toute la différence, et c'est notre spécialité.",
+  },
+  {
+    name: 'Uccle',
+    text: "Villas, avenues arborées et propriétés spacieuses : à Uccle, les volumes sont souvent importants. Nous dimensionnons l'équipe et le camion en conséquence, avec un soin particulier pour les beaux mobiliers.",
+  },
+  {
+    name: 'Saint-Gilles',
+    text: "Le parvis, les maisons Art nouveau, les rues en pente autour de la Barrière : Saint-Gilles demande de l'agilité. Nos déménageurs connaissent chaque recoin de la commune et ses règles de stationnement.",
+  },
+  {
+    name: 'Etterbeek',
+    text: "Entre le quartier européen et le Cinquantenaire, Etterbeek accueille beaucoup d'expatriés : nous y réalisons aussi bien des déménagements locaux que des départs vers l'étranger, souvent coordonnés avec des dates de mutation précises.",
+  },
+  {
+    name: 'Molenbeek-Saint-Jean',
+    text: "Du centre historique aux nouveaux lofts des anciennes filatures le long du canal, Molenbeek se transforme. Nous y intervenons pour les particuliers comme pour les ateliers et petites entreprises.",
+  },
+  {
+    name: 'Forest',
+    text: "Altitude Cent, Saint-Denis, l'Union : Forest et ses rues en forte pente exigent un chargement bien pensé et un stationnement bien placé. Notre expérience locale évite les mauvaises surprises.",
+  },
+  {
+    name: 'Jette',
+    text: "Commune familiale par excellence, Jette combine maisons mitoyennes et immeubles récents avec ascenseur. Les déménagements y sont souvent rapides — à condition d'avoir réservé l'emplacement du camion, ce que nous gérons.",
+  },
+  {
+    name: 'Evere',
+    text: "Proche de l'OTAN et de l'aéroport, Evere héberge de nombreux travailleurs internationaux. Nous y assurons des déménagements locaux et des départs vers l'étranger, avec une logistique adaptée aux immeubles récents.",
+  },
+  {
+    name: 'Woluwe-Saint-Pierre',
+    text: "Avenues résidentielles, maisons quatre façades et appartements de standing : à Woluwe-Saint-Pierre, la protection du mobilier et des parties communes est une exigence que nous plaçons au premier plan.",
+  },
+  {
+    name: 'Woluwe-Saint-Lambert',
+    text: "Entre Roodebeek, Tomberg et le shopping de Woluwe, la commune allie résidences modernes et quartiers calmes. Ascenseurs, parkings souterrains, conciergeries : nous coordonnons tous ces accès avant le jour J.",
+  },
+  {
+    name: 'Auderghem',
+    text: "Aux portes de la forêt de Soignes, Auderghem attire les familles. Boulevard du Souverain ou petites rues résidentielles : nous adaptons le gabarit du véhicule à chaque configuration.",
+  },
+  {
+    name: 'Watermael-Boitsfort',
+    text: "Ses cités-jardins classées et ses ruelles verdoyantes font de Watermael-Boitsfort un cas particulier : accès étroits, végétation, stationnement limité. Un repérage précis en amont garantit un déménagement fluide.",
+  },
+  {
+    name: 'Koekelberg',
+    text: "À l'ombre de la Basilique, Koekelberg est une commune compacte où tout se joue sur l'organisation du stationnement et la rapidité d'exécution. Parfait terrain pour nos équipes habituées au travail efficace.",
+  },
+  {
+    name: 'Ganshoren',
+    text: "Immeubles à appartements des années 60-70, ascenseurs parfois exigus : à Ganshoren, nous évaluons systématiquement si le mobilier passe par la cage d'escalier ou s'il faut prévoir un lift.",
+  },
+  {
+    name: 'Berchem-Sainte-Agathe',
+    text: "Commune paisible aux airs de village, Berchem-Sainte-Agathe mélange maisons unifamiliales et petits immeubles. Les déménagements y sont agréables — nous veillons à préserver jardins et allées lors du portage.",
+  },
+  {
+    name: 'Saint-Josse-ten-Noode',
+    text: "La commune la plus dense de Belgique : rues étroites, circulation soutenue, stationnement rare. Notre connaissance du terrain et la réservation d'emplacement font gagner des heures le jour du déménagement.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs crumbs={[{ label: "Zones d'intervention", href: '/zones-intervention/' }]} />
+
+  <section class="zones-hero">
+    <div class="container zones-hero-inner">
+      <div>
+        <h1>Nos zones d'intervention</h1>
+        <p class="zones-intro">
+          Basés boulevard du Midi, à deux pas de la gare du Midi, nous intervenons dans
+          <strong>les 19 communes de la Région de Bruxelles-Capitale</strong>, partout en
+          Belgique et à l'international. Chaque commune bruxelloise a ses particularités —
+          et nous les connaissons.
+        </p>
+        <div class="zones-ctas">
+          <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+            Demander un devis gratuit
+            <Icon name="arrow" size={18} />
+          </a>
+        </div>
+      </div>
+      <div class="zones-hero-media">
+        <Image
+          src={img}
+          alt="Camionnette de déménagement stationnée dans une rue de Bruxelles"
+          width={640}
+          densities={[1, 2]}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Bruxelles-Capitale</span>
+        <h2>Déménagement dans les 19 communes de Bruxelles</h2>
+        <p>
+          Un déménagement à Ixelles ne ressemble pas à un déménagement à Uccle. Voici
+          comment nous travaillons dans chaque commune.
+        </p>
+      </div>
+      <div class="zones-grid">
+        {zones.map((z) => (
+          <div class="card zone-card">
+            <h3>
+              <Icon name="pin" size={17} />
+              Déménagement {z.name}
+            </h3>
+            <p>{z.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Et au-delà</span>
+        <h2>Belgique entière et international</h2>
+      </div>
+      <div class="grid grid--2">
+        <div class="card">
+          <h3>Partout en Belgique</h3>
+          <p>
+            Brabant wallon et flamand, Anvers, Gand, Liège, Namur, Charleroi, Mons, la
+            côte belge&nbsp;: nous assurons les déménagements longue distance dans tout le
+            pays, au départ ou à destination de Bruxelles — et même entre deux villes de
+            province.
+          </p>
+          <a href="/services/demenagement-belgique/" class="btn btn--outline">
+            Déménagement en Belgique
+            <Icon name="arrow" size={16} />
+          </a>
+        </div>
+        <div class="card">
+          <h3>Toute l'Europe</h3>
+          <p>
+            France, Pays-Bas, Allemagne, Luxembourg, Espagne, Portugal, Italie,
+            Suisse&nbsp;: nos équipes organisent votre déménagement international de porte
+            à porte, avec emballage renforcé et un interlocuteur unique.
+          </p>
+          <a href="/demenagement-international/" class="btn btn--outline">
+            Déménagement international
+            <Icon name="arrow" size={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner title="Votre commune est dans la liste ? Parlons de votre déménagement" />
+</BaseLayout>
+
+<style>
+  .zones-hero {
+    background: linear-gradient(180deg, var(--blue-50), #ffffff);
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+
+  .zones-hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+
+  .zones-intro {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.6rem;
+  }
+
+  .zones-hero-media :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .zones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  .zone-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    color: var(--navy-800);
+    margin-bottom: 0.5rem;
+  }
+
+  .zone-card h3 :global(svg) { color: var(--amber-600); flex-shrink: 0; }
+
+  .zone-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .section--soft .card .btn { margin-top: 0.4rem; }
+
+  @media (max-width: 980px) {
+    .zones-hero-inner { grid-template-columns: 1fr; }
+    .zones-hero-media { order: -1; }
+    .zones-hero-media :global(img) { aspect-ratio: 16 / 9; }
+    .zones-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .zones-grid { grid-template-columns: 1fr; }
+  }
+</style>

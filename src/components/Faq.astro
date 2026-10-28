@@ -1,0 +1,82 @@
+---
+// Accordéon FAQ accessible (details/summary natifs) + schéma FAQPage optionnel.
+import type { FaqItem } from '../data/faq';
+import Icon from './Icon.astro';
+
+interface Props {
+  items: FaqItem[];
+  /** Injecter le JSON-LD FAQPage (une seule fois par page). */
+  withSchema?: boolean;
+}
+
+const { items, withSchema = false } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<div class="faq-list">
+  {items.map((f, i) => (
+    <details class="faq-item" open={i === 0}>
+      <summary>
+        <span>{f.question}</span>
+        <Icon name="chevron" size={20} class="faq-chevron" />
+      </summary>
+      <p>{f.answer}</p>
+    </details>
+  ))}
+</div>
+
+{withSchema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+<style>
+  .faq-list {
+    display: grid;
+    gap: 0.8rem;
+    max-width: 820px;
+  }
+
+  .faq-item {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.05rem 1.3rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.06rem;
+    color: var(--navy-800);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  summary :global(.faq-chevron) {
+    flex-shrink: 0;
+    color: var(--amber-600);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] summary :global(.faq-chevron) { transform: rotate(180deg); }
+
+  .faq-item p {
+    padding: 0 1.3rem 1.2rem;
+    margin: 0;
+    color: var(--ink-soft);
+  }
+</style>

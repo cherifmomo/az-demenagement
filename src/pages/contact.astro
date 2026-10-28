@@ -1,0 +1,199 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QuoteCta from '../components/QuoteCta.astro';
+import Icon from '../components/Icon.astro';
+import { company } from '../data/company';
+import img from '../assets/images/camionnette-demenagement-bruxelles.jpg';
+
+const title = 'Contact & devis déménagement Bruxelles — Gratuit | AZ Déménagement';
+const description =
+  "Demandez votre devis de déménagement gratuit à Bruxelles, en Belgique ou à l'international. Réponse rapide par téléphone au 0471 / 65 39 47 ou via notre formulaire en ligne.";
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact et demande de devis — AZ Déménagement',
+  url: `${company.domain}/contact/`,
+  about: { '@id': `${company.domain}/#organization` },
+};
+---
+
+<BaseLayout title={title} description={description} schema={[contactSchema]}>
+  <Breadcrumbs crumbs={[{ label: 'Contact & devis', href: '/contact/' }]} />
+
+  <section class="section contact-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Contact & devis</span>
+        <h1>Demandez votre devis de déménagement gratuit</h1>
+        <p>
+          Décrivez votre déménagement en quelques minutes via notre formulaire en
+          ligne&nbsp;: nous analysons votre demande et revenons vers vous rapidement avec
+          une offre claire, détaillée et sans engagement. Pour une réponse immédiate,
+          appelez-nous directement.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-main">
+          <QuoteCta />
+
+          <div class="card contact-tips">
+            <h2>Pour un devis précis, pensez à mentionner</h2>
+            <ul>
+              <li>Vos <strong>deux adresses complètes</strong> (commune, ville ou pays).</li>
+              <li>Votre <strong>volume estimé</strong> ou une description de votre logement.</li>
+              <li>Les <strong>étages et ascenseurs</strong> au départ et à l'arrivée.</li>
+              <li>La <strong>date souhaitée</strong> de votre déménagement.</li>
+              <li>Les <strong>objets particuliers</strong>&nbsp;: piano, coffre, œuvres, meubles à démonter.</li>
+              <li>Les <strong>services souhaités</strong>&nbsp;: emballage, cartons, montage des meubles, lift.</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="contact-aside">
+          <div class="card contact-card">
+            <h2>Retrouvez-nous</h2>
+            <p class="contact-line">
+              <Icon name="pin" size={20} />
+              <span>
+                <strong>{company.legalName}</strong><br />
+                {company.address.street}<br />
+                {company.address.postalCode} {company.address.city}, {company.address.country}
+              </span>
+            </p>
+            <p class="contact-line">
+              <Icon name="file" size={20} />
+              <span>TVA&nbsp;: {company.vat}</span>
+            </p>
+            <p class="contact-line">
+              <Icon name="phone" size={20} />
+              <a href={company.phoneHref}><strong>{company.phoneDisplay}</strong></a>
+            </p>
+            <p class="contact-line">
+              <Icon name="mail" size={20} />
+              <a href={`mailto:${company.email}`}>{company.email}</a>
+            </p>
+
+            <h2>Heures d'ouverture</h2>
+            <ul class="hours-list">
+              {company.openingHours.map((h) => (
+                <li>
+                  <Icon name="clock" size={16} />
+                  <span><strong>{h.days}</strong>&nbsp;: {h.hours}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a href={company.phoneHref} class="btn btn--dark contact-call">
+              <Icon name="phone" size={18} />
+              Appeler maintenant
+            </a>
+          </div>
+
+          <div class="contact-media">
+            <Image
+              src={img}
+              alt="Camionnette de déménagement stationnée devant un bâtiment, prête au chargement"
+              width={520}
+              densities={[1, 2]}
+              loading="lazy"
+            />
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-section h1 { font-size: clamp(1.8rem, 3.8vw, 2.6rem); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .contact-main {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .contact-card h2,
+  .contact-tips h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .contact-card h2:not(:first-child) { margin-top: 1.6rem; }
+
+  .contact-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .contact-line :global(svg) {
+    color: var(--blue-600);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .contact-line a {
+    color: var(--navy-800);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contact-line a:hover { color: var(--blue-600); }
+
+  .hours-list {
+    list-style: none;
+    margin: 0 0 1.4rem;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .hours-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--ink-soft);
+  }
+
+  .hours-list :global(svg) { color: var(--accent-text); flex-shrink: 0; }
+
+  .contact-call { width: 100%; }
+
+  .contact-aside {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .contact-media :global(img) {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .contact-tips ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--ink-soft);
+  }
+
+  .contact-tips li { margin-bottom: 0.5rem; }
+
+  @media (max-width: 960px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>

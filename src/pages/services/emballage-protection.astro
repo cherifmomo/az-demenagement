@@ -1,0 +1,95 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import img from '../../assets/images/emballage-objets-fragiles.jpg';
+
+const faq = [
+  {
+    question: 'Fournissez-vous les cartons et le matériel ?',
+    answer:
+      "Oui. Nous fournissons des cartons de déménagement solides (simple et double cannelure), du papier bulle, du papier de soie, du film étirable, des housses pour matelas et canapés ainsi que des cartons spécifiques : cartons-penderie pour les vêtements, cartons renforcés pour les livres, croisillons pour les verres et bouteilles.",
+  },
+  {
+    question: "L'emballage par vos soins est-il vraiment utile ?",
+    answer:
+      "C'est le poste qui fait la plus grande différence sur l'état de vos biens à l'arrivée. Un professionnel emballe plus vite, mais surtout mieux : chaque objet fragile est protégé individuellement, les cartons sont remplis sans vide ni surcharge, et tout est étiqueté. C'est particulièrement recommandé pour la vaisselle, les verres, les cadres et les longs trajets.",
+  },
+  {
+    question: 'Emballez-vous aussi les œuvres d’art et objets spéciaux ?',
+    answer:
+      "Oui. Tableaux, miroirs, luminaires, instruments de musique, collections : nous utilisons des protections adaptées (cornières, mousse, caisses sur mesure si nécessaire) et une manipulation spécifique. Mentionnez ces objets lors de votre demande de devis afin que nous prévoyions le bon matériel.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Emballage déménagement Bruxelles — Cartons & protection mobilier | AZ Déménagement"
+  description="Service d'emballage professionnel à Bruxelles : fourniture de cartons, protection du mobilier, emballage de la vaisselle et des objets fragiles. Devis gratuit."
+  h1="Emballage et protection du mobilier"
+  intro="La casse n'est pas une fatalité. Avec un emballage professionnel et une protection systématique du mobilier, vos biens arrivent dans l'état exact où ils sont partis — même les verres en cristal de grand-mère."
+  image={img}
+  imageAlt="Déménageur emballant des verres avec du papier de protection dans un carton"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Emballage & protection', href: '/services/emballage-protection/' },
+  ]}
+  serviceName="Emballage et protection du mobilier"
+  faq={faq}
+  faqTitle="Vos questions sur l'emballage"
+  ctaTitle="Confiez vos biens fragiles à des mains expertes"
+>
+  <h2>Trois niveaux de service, selon vos besoins</h2>
+  <div class="two-col">
+    <div>
+      <h3>Fourniture de matériel</h3>
+      <p>
+        Vous emballez vous-même&nbsp;? Nous vous livrons des cartons professionnels et le
+        matériel adapté&nbsp;: papier bulle, film étirable, adhésif, housses. Fini les
+        cartons de supermarché qui cèdent dans l'escalier.
+      </p>
+    </div>
+    <div>
+      <h3>Emballage du fragile</h3>
+      <p>
+        Nous emballons uniquement ce qui craint le transport&nbsp;: vaisselle, verres,
+        cadres, miroirs, lampes, électronique. Vous gardez la main sur le reste et
+        maîtrisez votre budget.
+      </p>
+    </div>
+  </div>
+  <h3>Emballage complet du logement</h3>
+  <p>
+    La formule sérénité&nbsp;: notre équipe emballe l'intégralité de votre logement, pièce
+    par pièce, avec un étiquetage systématique (contenu + pièce de destination). Le jour
+    du déménagement, tout est prêt&nbsp;; à l'arrivée, chaque carton rejoint directement
+    la bonne pièce.
+  </p>
+
+  <h2>La protection du mobilier, notre réflexe de base</h2>
+  <p>
+    Même sans service d'emballage, la protection du mobilier est incluse dans tous nos
+    déménagements&nbsp;: couvertures de déménagement épaisses pour les meubles, film
+    étirable pour les fauteuils et canapés, housses pour matelas, protections d'angles
+    pour les meubles laqués. Les meubles démontés voyagent avec leur visserie triée en
+    sachets étiquetés — voir notre service de
+    <a href="/services/montage-demontage-meubles/">montage et démontage de meubles</a>.
+  </p>
+
+  <h2>Un emballage pensé pour le trajet</h2>
+  <p>
+    Un carton bien fait pour traverser Bruxelles ne suffit pas toujours pour traverser
+    l'Europe. Nous adaptons le niveau de protection à la distance&nbsp;: emballage renforcé
+    et calage spécifique pour les
+    <a href="/services/demenagement-belgique/">trajets longue distance en Belgique</a> et
+    les <a href="/demenagement-international/">déménagements internationaux</a>.
+  </p>
+
+  <div class="info-card">
+    <p>
+      <strong>Conseil de pro&nbsp;:</strong> commencez vos cartons par les objets que vous
+      utilisez le moins (livres, décoration, vêtements hors saison) et gardez pour la fin
+      un carton « premières heures » avec l'essentiel&nbsp;: chargeurs, documents, trousse
+      de toilette, vaisselle de base. Votre première soirée dans le nouveau logement sera
+      beaucoup plus douce.
+    </p>
+  </div>
+</ServiceLayout>

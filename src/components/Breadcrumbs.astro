@@ -1,0 +1,70 @@
+---
+// Fil d'Ariane visible + données structurées BreadcrumbList.
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${site}/` },
+    ...crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: c.label,
+      ...(c.href ? { item: `${site}${c.href}` } : {}),
+    })),
+  ],
+};
+---
+
+<nav class="breadcrumbs" aria-label="Fil d'Ariane">
+  <div class="container">
+    <ol>
+      <li><a href="/">Accueil</a></li>
+      {crumbs.map((c, i) => (
+        <li aria-current={i === crumbs.length - 1 ? 'page' : undefined}>
+          {c.href && i !== crumbs.length - 1 ? <a href={c.href}>{c.label}</a> : c.label}
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .breadcrumbs {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.88rem;
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.6rem 0;
+    color: var(--ink-soft);
+  }
+
+  li:not(:first-child)::before {
+    content: '›';
+    margin: 0 0.45rem;
+    color: var(--ink-soft);
+  }
+
+  a { color: var(--ink-soft); text-decoration: none; }
+  a:hover { color: var(--blue-600); text-decoration: underline; }
+</style>

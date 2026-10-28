@@ -1,0 +1,78 @@
+---
+// Bloc de demande de devis : bouton vers le formulaire en ligne (Odoo)
+// + coordonnées directes. Remplace l'ancien formulaire intégré.
+import Icon from './Icon.astro';
+import { company } from '../data/company';
+---
+
+<div class="quote-cta">
+  <span class="quote-icon">
+    <Icon name="file" size={30} />
+  </span>
+  <h3>Demandez votre devis gratuit en ligne</h3>
+  <p>
+    Décrivez votre déménagement en quelques minutes via notre formulaire sécurisé&nbsp;:
+    adresses, date souhaitée, volume et services souhaités. Nous revenons vers vous
+    rapidement avec une offre claire, détaillée et sans engagement.
+  </p>
+  <a
+    href={company.quoteUrl}
+    class="btn btn--primary btn--lg quote-btn"
+    target="_blank"
+    rel="noopener"
+  >
+    Recevoir mon devis gratuit
+    <Icon name="arrow" size={18} />
+  </a>
+  <p class="quote-alt">
+    Vous préférez un contact direct&nbsp;? Appelez-nous au
+    <a href={company.phoneHref}><strong>{company.phoneDisplay}</strong></a> ou écrivez à
+    <a href={`mailto:${company.email}`}>{company.email}</a>.
+  </p>
+</div>
+
+<style>
+  .quote-cta {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.8rem, 4vw, 2.6rem);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+
+  .quote-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: var(--amber-100);
+    color: var(--accent-text);
+    margin-bottom: 1.1rem;
+  }
+
+  .quote-cta h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .quote-cta p {
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 auto 1.5rem;
+  }
+
+  .quote-btn { width: 100%; max-width: 420px; }
+
+  .quote-alt {
+    margin: 1.2rem auto 0;
+    font-size: 0.95rem;
+  }
+
+  .quote-alt a {
+    color: var(--navy-800);
+    font-weight: 600;
+  }
+</style>

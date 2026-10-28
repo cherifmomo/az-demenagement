@@ -1,0 +1,77 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { company } from '../../data/company';
+import img from '../../assets/images/montage-meuble-visseuse.jpg';
+
+const faq = [
+  {
+    question: 'Montez-vous les meubles en kit (IKEA et autres enseignes) ?',
+    answer:
+      "Oui. Nos équipes montent régulièrement des meubles en kit de toutes les grandes enseignes : armoires, dressings de type PAX, lits, commodes, bibliothèques, bureaux. Que le meuble soit neuf en carton ou déjà monté à démonter puis remonter, nous avons l'habitude et l'outillage.",
+  },
+  {
+    question: 'Comment évitez-vous de perdre des vis et des pièces ?',
+    answer:
+      "Chaque meuble démonté a son propre sachet de visserie, étiqueté et scotché sur l'un de ses panneaux ou regroupé dans une caisse dédiée. Les panneaux sont protégés par des couvertures et transportés à plat ou sur chant selon leur matériau. Au remontage, tout est là, au bon endroit.",
+  },
+  {
+    question: "Puis-je réserver uniquement un montage, sans déménagement ?",
+    answer:
+      "Oui. Si vous venez d'acheter une armoire ou un dressing et que la notice vous décourage, nous pouvons intervenir uniquement pour le montage, à Bruxelles et dans les environs. Décrivez le meuble concerné dans votre demande de devis pour recevoir un prix rapidement.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Montage & démontage de meubles Bruxelles | AZ Déménagement"
+  description="Démontage avant le départ, remontage à l'arrivée : armoires, lits, dressings et meubles en kit, avec visserie triée et panneaux protégés. Bruxelles et Belgique."
+  h1="Montage et démontage de meubles"
+  intro="Une armoire trois portes ne passe pas par la cage d'escalier — et c'est normal. Nous démontons vos meubles avant le départ et les remontons à l'arrivée, proprement, avec l'outillage adapté et sans pièce manquante."
+  image={img}
+  imageAlt="Monteur assemblant un meuble à l'aide d'une visseuse"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Montage & démontage', href: '/services/montage-demontage-meubles/' },
+  ]}
+  serviceName="Montage et démontage de meubles"
+  faq={faq}
+  faqTitle="Vos questions sur le montage de meubles"
+  ctaTitle="Vos meubles démontés, transportés et remontés"
+>
+  <h2>Pourquoi confier le démontage à des professionnels&nbsp;?</h2>
+  <p>
+    Le démontage est le moment où les meubles souffrent le plus&nbsp;: une vis forcée, un
+    panneau fissuré, une charnière tordue, et votre armoire ne sera plus jamais la même.
+    Nos équipes démontent dans l'ordre, avec les bons outils, en protégeant chaque panneau
+    au fur et à mesure. C'est plus rapide, plus sûr — et cela évite l'achat d'un meuble
+    neuf à l'arrivée.
+  </p>
+
+  <h2>Les meubles que nous prenons en charge</h2>
+  <ul class="check-list">
+    <li><strong>Armoires et dressings</strong>, y compris les grandes façades à portes coulissantes.</li>
+    <li><strong>Lits</strong> : cadres, sommiers, lits coffres, lits superposés et lits d'enfant.</li>
+    <li><strong>Meubles en kit</strong> de toutes enseignes, neufs ou déjà montés.</li>
+    <li><strong>Tables et bureaux</strong>, plateaux fragiles et pieds démontables.</li>
+    <li><strong>Bibliothèques et étagères</strong>, avec repérage de l'ordre de remontage.</li>
+    <li><strong>Mobilier de bureau</strong> : bench, cloisons, caissons — voir aussi notre service <a href="/services/demenagement-entreprises/">déménagement d'entreprises</a>.</li>
+  </ul>
+
+  <h2>Notre méthode, étape par étape</h2>
+  <ul class="check-list">
+    <li><strong>1. Repérage</strong> — nous identifions les meubles à démonter dès le devis, pour prévoir le temps et l'outillage.</li>
+    <li><strong>2. Démontage organisé</strong> — chaque meuble est démonté dans l'ordre, ses pièces regroupées et sa visserie ensachée et étiquetée.</li>
+    <li><strong>3. Protection et transport</strong> — panneaux sous couvertures, éléments fragiles calés dans le camion — voir notre page <a href="/services/emballage-protection/">emballage et protection</a>.</li>
+    <li><strong>4. Remontage et réglage</strong> — à l'arrivée, nous remontons, ajustons portes et tiroirs, et plaçons le meuble à l'endroit exact que vous souhaitez.</li>
+  </ul>
+
+  <div class="info-card">
+    <p>
+      <strong>Inclus dans votre déménagement&nbsp;:</strong> le montage et le démontage
+      peuvent être intégrés à votre
+      <a href="/services/demenagement-particuliers/">déménagement complet</a> ou réservés
+      comme prestation indépendante. Dans les deux cas, le
+      <a href={company.quoteUrl} target="_blank" rel="noopener">devis est gratuit</a> et détaillé.
+    </p>
+  </div>
+</ServiceLayout>

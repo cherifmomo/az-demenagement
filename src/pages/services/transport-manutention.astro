@@ -1,0 +1,84 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { company } from '../../data/company';
+import img from '../../assets/images/chargement-camion-demenagement.jpg';
+
+const faq = [
+  {
+    question: 'Transportez-vous un seul meuble ?',
+    answer:
+      "Oui. Canapé acheté en seconde main, armoire à livrer chez un proche, électroménager à déplacer : nous assurons le transport de meubles à l'unité, à Bruxelles comme partout en Belgique. Le devis est proportionnel au service : pour un petit transport, vous payez un petit prix.",
+  },
+  {
+    question: "Puis-je louer uniquement des bras, sans camion ?",
+    answer:
+      "Tout à fait. Si vous avez déjà un véhicule ou une camionnette de location, notre équipe peut intervenir uniquement pour le chargement et le déchargement. C'est une aide au déménagement très appréciée pour les gros meubles, les étages sans ascenseur ou simplement pour gagner du temps.",
+  },
+  {
+    question: 'Manipulez-vous les objets très lourds (piano, coffre-fort) ?',
+    answer:
+      "Oui, avec le matériel et les techniques appropriés : sangles de portage, diables renforcés, protections spécifiques et une équipe dimensionnée pour la charge. Signalez l'objet concerné (piano, coffre-fort, machine, aquarium…) dès la demande de devis pour que nous préparions l'intervention en toute sécurité.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Transport meubles Bruxelles — Chargement & manutention | AZ Déménagement"
+  description="Transport de meubles, chargement et déchargement de camion, aide au déménagement à Bruxelles et en Belgique. Une équipe et un véhicule adaptés, devis gratuit."
+  h1="Transport de meubles et manutention"
+  intro="Besoin d'un camion et de bras expérimentés, sans forcément un déménagement complet ? Transport d'un meuble, chargement d'une camionnette, portage d'objets lourds : nous intervenons à la carte, rapidement et au juste prix."
+  image={img}
+  imageAlt="Déménageur chargeant des cartons dans un camion de déménagement"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Transport & manutention', href: '/services/transport-manutention/' },
+  ]}
+  serviceName="Transport de meubles et manutention"
+  faq={faq}
+  faqTitle="Vos questions sur le transport et la manutention"
+  ctaTitle="Un meuble à transporter ? Un camion à charger ?"
+>
+  <h2>Des services à la carte, sans formule imposée</h2>
+  <p>
+    Tout le monde n'a pas besoin d'un déménagement clé en main. Parfois, il ne manque
+    qu'un maillon&nbsp;: un véhicule adapté, deux déménageurs costauds, une heure de
+    portage. Nos services de transport et de manutention répondent exactement à ces
+    besoins ponctuels&nbsp;:
+  </p>
+  <ul class="check-list">
+    <li><strong>Transport de meubles</strong> à l'unité ou en petit volume : canapé, armoire, électroménager, literie.</li>
+    <li><strong>Chargement et déchargement</strong> de votre camionnette ou camion de location.</li>
+    <li><strong>Aide au déménagement</strong> : renfort de bras pour compléter votre équipe d'amis ou de famille.</li>
+    <li><strong>Manutention d'objets lourds ou encombrants</strong> : piano, coffre-fort, machine, mobilier massif.</li>
+    <li><strong>Livraison de meubles</strong> achetés en magasin ou en seconde main, avec montage possible.</li>
+    <li><strong>Transferts internes</strong> : déplacer des meubles d'un étage ou d'une pièce à l'autre.</li>
+  </ul>
+
+  <h2>Le bon véhicule et le bon matériel</h2>
+  <p>
+    Une manutention réussie, c'est d'abord une question de préparation. Selon la mission,
+    nous mobilisons le véhicule adapté au volume et à l'accès, ainsi que le matériel
+    professionnel qui fait la différence&nbsp;: sangles de levage, diables et chariots,
+    couvertures de protection, patins de glisse pour les sols fragiles. Vos biens comme
+    vos murs, escaliers et parquets sont préservés.
+  </p>
+
+  <h2>À Bruxelles et dans toute la Belgique</h2>
+  <p>
+    Nos équipes de manutention interviennent dans
+    <a href="/services/demenagement-bruxelles/">toute la Région bruxelloise</a> et se
+    déplacent <a href="/services/demenagement-belgique/">partout en Belgique</a> pour les
+    transports de meubles longue distance. Pour un projet plus complet, découvrez nos
+    services de <a href="/services/demenagement-particuliers/">déménagement pour particuliers</a>
+    ou d'<a href="/services/emballage-protection/">emballage et protection du mobilier</a>.
+  </p>
+
+  <div class="info-card">
+    <p>
+      <strong>Tarification simple&nbsp;:</strong> pour une prestation de transport ou de
+      manutention, le devis dépend du volume ou de l'objet, du trajet et du temps
+      d'intervention estimé. Décrivez votre besoin en deux minutes via le
+      <a href={company.quoteUrl} target="_blank" rel="noopener">formulaire de devis</a> — réponse rapide garantie.
+    </p>
+  </div>
+</ServiceLayout>

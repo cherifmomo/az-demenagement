@@ -1,0 +1,58 @@
+---
+// Barre fixe mobile : Appeler | Devis — visible uniquement sur petits écrans.
+import Icon from './Icon.astro';
+import { company } from '../data/company';
+---
+
+<div class="sticky-bar" role="navigation" aria-label="Actions rapides">
+  <a href={company.phoneHref} class="sticky-btn sticky-btn--call">
+    <Icon name="phone" size={19} />
+    Appeler
+  </a>
+  <a href={company.quoteUrl} target="_blank" rel="noopener" class="sticky-btn sticky-btn--quote">
+    <Icon name="file" size={19} />
+    Devis gratuit
+  </a>
+</div>
+
+<style>
+  .sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 210; /* au-dessus de la bannière cookies (200), qui lui réserve la place */
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -4px 20px rgb(13 31 60 / 0.12);
+  }
+
+  .sticky-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.95rem 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .sticky-btn--call {
+    background: var(--navy-800);
+    color: #ffffff;
+  }
+
+  .sticky-btn--quote {
+    background: var(--amber-500);
+    color: var(--navy-900);
+  }
+
+  @media (max-width: 760px) {
+    .sticky-bar { display: grid; }
+  }
+</style>

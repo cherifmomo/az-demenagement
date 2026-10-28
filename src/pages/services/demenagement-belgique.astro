@@ -1,0 +1,83 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import img from '../../assets/images/camions-quai-chargement.jpg';
+
+const faq = [
+  {
+    question: 'Déménagez-vous entre deux villes situées hors de Bruxelles ?',
+    answer:
+      "Oui. Même si notre base est à Bruxelles, nous assurons des déménagements entre toutes les villes belges, par exemple d'Anvers vers Liège ou de Gand vers Namur. Le devis tient compte du trajet réel et de la logistique nécessaire.",
+  },
+  {
+    question: 'Un déménagement Bruxelles–province se fait-il en une journée ?',
+    answer:
+      "Dans la grande majorité des cas, oui. La Belgique se traverse en quelques heures : un déménagement de Bruxelles vers Anvers, Gand, Liège, Namur ou même la côte se réalise généralement en une seule journée, chargement et déchargement compris. Pour les très gros volumes, une organisation sur deux jours peut être proposée.",
+  },
+  {
+    question: 'Le prix dépend-il de la distance ?',
+    answer:
+      "La distance est l'un des facteurs, avec le volume et l'accessibilité des deux adresses. Un trajet Bruxelles–Wavre ne se chiffre pas comme un Bruxelles–Ostende. Chaque devis est calculé sur votre trajet précis, sans forfait approximatif.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Déménagement Belgique — De Bruxelles vers tout le pays | AZ Déménagement"
+  description="Déménagement partout en Belgique depuis Bruxelles : Anvers, Gand, Liège, Namur, Charleroi, la côte. Transport sécurisé, équipe professionnelle, devis gratuit."
+  h1="Déménagement partout en Belgique"
+  intro="De Bruxelles vers Anvers, Gand, Liège, Namur, Charleroi, Mons ou la côte — et dans l'autre sens : AZ Déménagement assure vos déménagements dans tout le pays, avec la même rigueur qu'un déménagement local."
+  image={img}
+  imageAlt="Grands camions de déménagement au quai de chargement pour un trajet longue distance"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Déménagement Belgique', href: '/services/demenagement-belgique/' },
+  ]}
+  serviceName="Déménagement en Belgique"
+  areaServed="Belgique"
+  faq={faq}
+  faqTitle="Vos questions sur le déménagement en Belgique"
+  ctaTitle="Déménagez sereinement, où que ce soit en Belgique"
+>
+  <h2>Toute la Belgique, au départ ou à destination de Bruxelles</h2>
+  <p>
+    Vous quittez la capitale pour le Brabant wallon&nbsp;? Vous rejoignez Bruxelles depuis
+    la Flandre&nbsp;? Vous changez de province pour le travail ou la famille&nbsp;? Nous
+    organisons votre déménagement de porte à porte, quelle que soit la distance&nbsp;:
+  </p>
+  <ul class="check-list">
+    <li><strong>Brabant wallon et Brabant flamand</strong> — Wavre, Louvain-la-Neuve, Nivelles, Louvain, Vilvorde, Hal…</li>
+    <li><strong>Flandre</strong> — Anvers, Gand, Bruges, Malines, Hasselt, Courtrai…</li>
+    <li><strong>Wallonie</strong> — Liège, Namur, Charleroi, Mons, Tournai, Arlon…</li>
+    <li><strong>La côte belge</strong> — Ostende, Knokke, La Panne, Blankenberge…</li>
+  </ul>
+
+  <h2>Une organisation pensée pour les trajets longue distance</h2>
+  <p>
+    Sur un déménagement longue distance, chaque détail compte davantage&nbsp;: un carton
+    mal fermé ou un meuble mal calé supporte mal 100 kilomètres d'autoroute. C'est
+    pourquoi nous soignons particulièrement&nbsp;:
+  </p>
+  <ul class="check-list">
+    <li>l'<strong>emballage renforcé</strong> des objets fragiles — voir notre service <a href="/services/emballage-protection/">emballage et protection</a>&nbsp;;</li>
+    <li>le <strong>calage et le sanglage</strong> du chargement dans le camion&nbsp;;</li>
+    <li>la <strong>planification de l'itinéraire</strong> et des horaires pour une livraison à l'heure convenue&nbsp;;</li>
+    <li>la <strong>coordination avec les deux adresses</strong> : accès, stationnement, ascenseur, lift éventuel.</li>
+  </ul>
+
+  <h2>Un seul interlocuteur du départ à l'arrivée</h2>
+  <p>
+    Votre déménagement est suivi par la même équipe du premier contact jusqu'au dernier
+    meuble remonté. Pas de sous-traitance en cascade&nbsp;: les déménageurs qui chargent
+    votre mobilier à Bruxelles sont ceux qui le déchargent à destination. C'est la
+    garantie d'un service cohérent et d'un mobilier traité avec soin sur tout le trajet.
+  </p>
+
+  <div class="info-card">
+    <p>
+      <strong>Vous partez plus loin&nbsp;?</strong> Nous organisons aussi des
+      déménagements vers la France, les Pays-Bas, l'Allemagne et le reste de l'Europe.
+      Découvrez notre service de
+      <a href="/demenagement-international/">déménagement international</a>.
+    </p>
+  </div>
+</ServiceLayout>

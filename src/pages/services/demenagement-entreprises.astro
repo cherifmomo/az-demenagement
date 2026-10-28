@@ -1,0 +1,95 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { company } from '../../data/company';
+import img from '../../assets/images/demenageurs-emballage-bureau.jpg';
+
+const faq = [
+  {
+    question: 'Pouvez-vous déménager nos bureaux en dehors des heures d’ouverture ?',
+    answer:
+      "Oui, c'est même la formule que nous recommandons pour la plupart des entreprises : intervention en soirée, tôt le matin ou le week-end, afin que vos équipes retrouvent des bureaux opérationnels sans interruption d'activité. Le planning est défini avec vous lors de la préparation du devis.",
+  },
+  {
+    question: 'Comment est protégé le matériel informatique ?',
+    answer:
+      "Écrans, unités centrales, serveurs et imprimantes sont emballés individuellement dans des protections adaptées (mousse, film bulle, bacs) et transportés verticalement et calés. Nous étiquetons chaque poste de travail pour que chaque collaborateur retrouve son matériel au bon endroit.",
+  },
+  {
+    question: "Établissez-vous un devis après visite sur site ?",
+    answer:
+      "Pour les transferts de bureaux, nous privilégions une visite sur place ou un échange vidéo : c'est le meilleur moyen d'évaluer précisément le volume, les contraintes d'accès et le phasage nécessaire. La visite et le devis sont gratuits et sans engagement.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Déménagement entreprise Bruxelles — Bureaux & commerces | AZ Déménagement"
+  description="Transfert de bureaux, commerces et locaux professionnels à Bruxelles et en Belgique. Intervention rapide, hors heures d'ouverture possible, devis gratuit sur mesure."
+  h1="Déménagement d'entreprises et de bureaux"
+  intro="Déménager une entreprise, c'est déplacer un outil de travail sans l'arrêter. Nous transférons vos bureaux, votre commerce ou votre cabinet avec méthode, rapidité et un minimum d'interruption pour votre activité."
+  image={img}
+  imageAlt="Déménageurs professionnels emballant le mobilier et les cartons d'un bureau"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Déménagement entreprises', href: '/services/demenagement-entreprises/' },
+  ]}
+  serviceName="Déménagement d'entreprises et de bureaux"
+  faq={faq}
+  faqTitle="Vos questions sur le déménagement d'entreprise"
+  ctaTitle="Planifions le transfert de vos bureaux"
+>
+  <h2>Un transfert d'entreprise organisé comme un projet</h2>
+  <p>
+    Un déménagement de bureaux réussi se joue avant le jour J. Nous préparons avec vous un
+    plan de transfert précis&nbsp;: inventaire du mobilier et du matériel, étiquetage par
+    service et par poste de travail, ordre de chargement, plan d'implantation à l'arrivée.
+    Résultat&nbsp;: vos équipes quittent leurs bureaux le vendredi soir et retrouvent un
+    espace de travail opérationnel le lundi matin.
+  </p>
+
+  <h2>Nos prestations pour les professionnels</h2>
+  <ul class="check-list">
+    <li><strong>Transfert de bureaux complets</strong> : postes de travail, mobilier, archives, salles de réunion.</li>
+    <li><strong>Déménagement de commerces</strong> : boutiques, horeca, showrooms, stock et agencement.</li>
+    <li><strong>Emballage professionnel</strong> du matériel informatique et des documents sensibles.</li>
+    <li><strong>Démontage et remontage</strong> du mobilier de bureau — bench, cloisons, armoires — voir notre service <a href="/services/montage-demontage-meubles/">montage et démontage</a>.</li>
+    <li><strong>Manutention lourde</strong> : coffres, machines, photocopieurs — voir <a href="/services/transport-manutention/">transport et manutention</a>.</li>
+    <li><strong>Interventions planifiées</strong> en soirée ou le week-end pour préserver votre activité.</li>
+  </ul>
+
+  <h2>Pourquoi les entreprises bruxelloises nous font confiance</h2>
+  <div class="two-col">
+    <div>
+      <h3>Rapidité et discrétion</h3>
+      <p>
+        Une équipe dimensionnée pour tenir les délais, des déménageurs habitués aux
+        environnements professionnels, et une exécution propre&nbsp;: protections au sol,
+        ascenseurs préservés, locaux rendus en parfait état.
+      </p>
+    </div>
+    <div>
+      <h3>Un interlocuteur dédié</h3>
+      <p>
+        Du premier rendez-vous à la remise des clés, vous échangez avec une seule
+        personne, qui connaît votre dossier et coordonne l'équipe sur le terrain. Les
+        imprévus sont gérés sans que vous ayez à vous en occuper.
+      </p>
+    </div>
+  </div>
+
+  <p>
+    Nous intervenons dans toute la Région de Bruxelles-Capitale — quartier européen,
+    centre-ville, zonings — ainsi que
+    <a href="/services/demenagement-belgique/">partout en Belgique</a> et
+    <a href="/demenagement-international/">à l'international</a> pour les transferts de
+    filiales.
+  </p>
+
+  <div class="info-card">
+    <p>
+      <strong>PME, indépendant ou grande structure&nbsp;:</strong> décrivez-nous votre
+      projet via le <a href={company.quoteUrl} target="_blank" rel="noopener">formulaire de devis</a> ou appelez-nous. Nous
+      organisons une visite gratuite de vos locaux pour établir une offre précise.
+    </p>
+  </div>
+</ServiceLayout>

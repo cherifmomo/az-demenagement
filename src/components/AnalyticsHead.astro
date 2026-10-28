@@ -1,0 +1,68 @@
+---
+// Tags Google — à placer dans <head>, une seule fois (BaseLayout).
+// Ordre volontaire et important :
+//   1. Google Consent Mode v2 : tout refusé par défaut, puis restauration
+//      du choix mémorisé AVANT le chargement des tags ;
+//   2. Google tag GA4 (gtag.js) — installation directe ;
+//   3. Google Tag Manager.
+// Tous les scripts sont `is:inline` : Astro ne les regroupe pas, ils
+// s'exécutent exactement dans cet ordre, sur toutes les pages.
+import { analytics } from '../data/analytics';
+
+const { ga4MeasurementId, gtmContainerId, consentStorageKey, consentVersion } = analytics;
+
+const consentScript = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  functionality_storage: 'granted',
+  security_storage: 'granted',
+  wait_for_update: 500
+});
+(function () {
+  try {
+    var raw = localStorage.getItem('${consentStorageKey}');
+    if (!raw) return;
+    var c = JSON.parse(raw);
+    if (!c || c.v !== ${consentVersion}) return;
+    if (Date.now() - (c.ts || 0) > 182 * 24 * 60 * 60 * 1000) return;
+    gtag('consent', 'update', {
+      analytics_storage: c.analytics ? 'granted' : 'denied',
+      ad_storage: c.ads ? 'granted' : 'denied',
+      ad_user_data: c.ads ? 'granted' : 'denied',
+      ad_personalization: c.ads ? 'granted' : 'denied'
+    });
+    window.__azConsent = c;
+  } catch (e) {}
+})();
+`;
+
+const gtagConfigScript = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', '${ga4MeasurementId}');
+`;
+
+const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmContainerId}');`;
+---
+
+<!-- Google Consent Mode v2 (défaut : refusé) -->
+<script is:inline set:html={consentScript} />
+
+<!-- Google tag (gtag.js) -->
+<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>
+<script is:inline set:html={gtagConfigScript} />
+
+<!-- Google Tag Manager -->
+<script is:inline set:html={gtmScript} />
+<!-- End Google Tag Manager -->

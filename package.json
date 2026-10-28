@@ -1,0 +1,20 @@
+{
+  "name": "azdemenagement",
+  "version": "1.0.0",
+  "description": "Site web AZ Déménagement — déménagement à Bruxelles, en Belgique et à l'international",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "qa": "node scripts/qa.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.1",
+    "@fontsource-variable/bricolage-grotesque": "^5.2.5",
+    "@fontsource-variable/inter": "^5.2.5",
+    "astro": "^5.12.0",
+    "sharp": "^0.34.2"
+  }
+}

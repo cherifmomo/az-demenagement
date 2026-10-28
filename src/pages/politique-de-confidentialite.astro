@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { company } from '../data/company';
+
+const title = 'Politique de confidentialité | AZ Déménagement';
+const description =
+  "Comment AZ Solutions Belgium collecte, utilise et protège vos données personnelles sur az-demenagement.be, conformément au RGPD.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs
+    crumbs={[{ label: 'Politique de confidentialité', href: '/politique-de-confidentialite/' }]}
+  />
+
+  <section class="section">
+    <div class="container prose">
+      <h1>Politique de confidentialité</h1>
+      <p>
+        La présente politique décrit la manière dont <strong>{company.legalName}</strong>
+        (« nous ») traite les données personnelles collectées via le site
+        az-demenagement.be, conformément au Règlement général sur la protection des données
+        (RGPD — Règlement (UE) 2016/679) et à la législation belge applicable.
+      </p>
+
+      <h2>Responsable du traitement</h2>
+      <p>
+        {company.legalName}<br />
+        {company.address.street}, {company.address.postalCode} {company.address.city},
+        {company.address.country}<br />
+        TVA&nbsp;: {company.vat}<br />
+        E-mail&nbsp;: <a href={`mailto:${company.email}`}>{company.email}</a> —
+        Téléphone&nbsp;: <a href={company.phoneHref}>{company.phoneDisplay}</a>
+      </p>
+
+      <h2>Données collectées</h2>
+      <p>
+        Lorsque vous remplissez notre formulaire de demande de devis en ligne (hébergé sur
+        notre plateforme de gestion Odoo, accessible depuis ce site), nous collectons les
+        données que vous nous transmettez&nbsp;:
+      </p>
+      <ul>
+        <li>identité&nbsp;: nom et prénom&nbsp;;</li>
+        <li>coordonnées&nbsp;: numéro de téléphone et adresse e-mail&nbsp;;</li>
+        <li>
+          informations relatives au déménagement&nbsp;: adresses de départ et de
+          destination, date souhaitée, type de déménagement, volume estimé et
+          informations complémentaires que vous choisissez de nous communiquer.
+        </li>
+      </ul>
+      <p>
+        Lorsque vous nous contactez par téléphone ou par e-mail, nous traitons les données
+        nécessaires au suivi de votre demande.
+      </p>
+
+      <h2>Finalités et base légale</h2>
+      <p>Vos données sont traitées pour&nbsp;:</p>
+      <ul>
+        <li>
+          établir et vous transmettre un devis, répondre à vos questions et organiser la
+          prestation demandée (mesures précontractuelles et exécution du contrat —
+          art. 6.1.b RGPD)&nbsp;;
+        </li>
+        <li>
+          assurer la gestion administrative, comptable et fiscale de notre activité
+          (obligation légale — art. 6.1.c RGPD).
+        </li>
+      </ul>
+      <p>
+        Nous n'utilisons pas vos données à des fins de prospection commerciale sans votre
+        accord, et nous ne les vendons ni ne les louons à des tiers.
+      </p>
+
+      <h2>Destinataires</h2>
+      <p>
+        Vos données sont accessibles aux seules personnes habilitées de notre entreprise.
+        Elles peuvent transiter par nos prestataires techniques strictement nécessaires au
+        fonctionnement du site et de la gestion des demandes (hébergement du site,
+        plateforme de gestion Odoo pour le formulaire de devis), agissant en qualité de
+        sous-traitants au sens du RGPD.
+      </p>
+
+      <h2>Durée de conservation</h2>
+      <p>
+        Les données liées à une demande de devis sans suite sont conservées le temps
+        nécessaire au traitement de la demande, puis supprimées dans un délai raisonnable.
+        Les données liées à une prestation réalisée sont conservées conformément aux
+        obligations légales comptables et fiscales belges.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation du
+        traitement, d'opposition et de portabilité de vos données. Pour exercer ces
+        droits, contactez-nous à
+        <a href={`mailto:${company.email}`}>{company.email}</a> ou par courrier à
+        l'adresse indiquée ci-dessus.
+      </p>
+      <p>
+        Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une
+        réclamation auprès de l'Autorité de protection des données (APD)&nbsp;:
+        <a href="https://www.autoriteprotectiondonnees.be" rel="noopener noreferrer" target="_blank">
+          www.autoriteprotectiondonnees.be</a>.
+      </p>
+
+      <h2>Sécurité</h2>
+      <p>
+        Nous mettons en œuvre des mesures techniques et organisationnelles appropriées
+        pour protéger vos données contre la perte, l'accès non autorisé et la divulgation,
+        notamment l'utilisation d'une connexion chiffrée (HTTPS) sur l'ensemble du site.
+      </p>
+
+      <h2>Mesure d'audience et publicité</h2>
+      <p>
+        Avec votre consentement, nous utilisons Google Analytics 4 et Google Tag Manager
+        pour mesurer la fréquentation du site et l'usage de nos boutons de contact, ainsi
+        que Google Ads pour évaluer l'efficacité de nos campagnes (base légale&nbsp;:
+        consentement — art. 6.1.a RGPD). Ces outils ne reçoivent <strong>aucune donnée
+        permettant de vous identifier</strong> (ni nom, ni e-mail, ni téléphone, ni
+        contenu de formulaire)&nbsp;: seuls des événements techniques anonymes sont
+        transmis (page consultée, clic sur un bouton d'appel, envoi d'une demande de
+        devis). Vous pouvez retirer votre consentement à tout moment via
+        <a href="/politique-cookies/" data-open-cookie-settings>Gérer les cookies</a>.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        L'utilisation de cookies et technologies similaires est décrite en détail dans
+        notre <a href="/politique-cookies/">politique de cookies</a>.
+      </p>
+
+      <h2>Mise à jour</h2>
+      <p>
+        Cette politique peut être adaptée en cas d'évolution du site ou de la
+        réglementation. La version publiée sur cette page est la version en vigueur.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

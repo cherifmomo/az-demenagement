@@ -1,0 +1,93 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import img from '../../assets/images/demenageurs-inventaire.jpg';
+
+const faq = [
+  {
+    question: "Puis-je emballer moi-même et ne confier que le transport ?",
+    answer:
+      "Bien sûr. Beaucoup de nos clients choisissent cette formule économique : vous préparez vos cartons, nous fournissons si besoin le matériel, puis notre équipe se charge du chargement, du transport et du déchargement. Vous pouvez aussi nous confier uniquement l'emballage des objets fragiles, comme la vaisselle ou les cadres.",
+  },
+  {
+    question: 'Que faire de mes objets de valeur pendant le déménagement ?',
+    answer:
+      "Nous vous conseillons de garder avec vous les documents importants, bijoux et petits objets de grande valeur. Pour le reste — télévisions, œuvres encadrées, miroirs, instruments — signalez-les lors du devis : nous prévoyons un emballage spécifique et une manipulation adaptée.",
+  },
+  {
+    question: "Proposez-vous un lift de déménagement ?",
+    answer:
+      "Oui, lorsque l'étage, l'escalier ou l'ascenseur ne permettent pas un portage classique, nous prévoyons un lift extérieur. C'est souvent la solution la plus rapide et la plus sûre pour les appartements bruxellois aux escaliers étroits. Le besoin est identifié dès le devis, selon les caractéristiques de vos deux adresses.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Déménagement particuliers Bruxelles — Studio, appartement, maison | AZ Déménagement"
+  description="Déménagement pour particuliers à Bruxelles et en Belgique : studio, appartement ou maison, avec emballage, montage des meubles et transport soigné. Devis gratuit."
+  h1="Déménagement pour particuliers"
+  intro="Un déménagement réussi, c'est une nouvelle vie qui commence bien. Studio, appartement familial ou maison entière : nous prenons soin de vos affaires comme si c'étaient les nôtres, avec une formule adaptée à votre budget."
+  image={img}
+  imageAlt="Déménageurs vérifiant l'inventaire des cartons avant le départ"
+  crumbs={[
+    { label: 'Services', href: '/services/' },
+    { label: 'Déménagement particuliers', href: '/services/demenagement-particuliers/' },
+  ]}
+  serviceName="Déménagement de particuliers"
+  faq={faq}
+  faqTitle="Vos questions sur le déménagement de particuliers"
+  ctaTitle="Parlons de votre déménagement"
+>
+  <h2>Chaque déménagement est unique — votre formule aussi</h2>
+  <p>
+    Un étudiant qui change de kot n'a pas les mêmes besoins qu'une famille qui quitte une
+    maison avec jardin. C'est pourquoi nous ne vendons pas de formule figée&nbsp;: nous
+    écoutons votre situation, puis nous construisons une offre sur mesure. Vous choisissez
+    ce que vous déléguez, nous nous occupons du reste.
+  </p>
+
+  <div class="two-col">
+    <div>
+      <h3>Vous faites vos cartons</h3>
+      <p>
+        La formule la plus économique. Nous pouvons vous fournir cartons et matériel, vous
+        emballez à votre rythme, et notre équipe assure le jour J&nbsp;: protection des
+        meubles, chargement, transport et déchargement.
+      </p>
+    </div>
+    <div>
+      <h3>Nous nous occupons de tout</h3>
+      <p>
+        La formule sérénité&nbsp;: notre équipe emballe l'ensemble du logement — vaisselle
+        et objets fragiles compris —, démonte les meubles, transporte, remonte et installe
+        chaque chose dans la bonne pièce de votre nouveau chez-vous.
+      </p>
+    </div>
+  </div>
+
+  <h2>Ce que nos clients particuliers apprécient</h2>
+  <ul class="check-list">
+    <li><strong>Un devis clair et gratuit</strong>, détaillé poste par poste, sans surprise en fin de chantier.</li>
+    <li><strong>Des horaires respectés</strong> : nous arrivons à l'heure convenue, prêts à travailler.</li>
+    <li><strong>Un mobilier protégé</strong> : couvertures, housses et film étirable pour chaque meuble sensible.</li>
+    <li><strong>Une équipe stable</strong> : les mêmes déménageurs du chargement à l'installation.</li>
+    <li><strong>De la flexibilité</strong> : week-end, fin de mois, contraintes d'immeuble… nous nous adaptons.</li>
+  </ul>
+
+  <h2>De Bruxelles vers votre nouvelle adresse, où qu'elle soit</h2>
+  <p>
+    Nous déménageons les particuliers dans
+    <a href="/services/demenagement-bruxelles/">toutes les communes de Bruxelles</a>,
+    <a href="/services/demenagement-belgique/">partout en Belgique</a> et
+    <a href="/demenagement-international/">à l'international</a>. Même à quelques rues de
+    distance, un déménagement bien organisé change tout&nbsp;: moins de fatigue, moins de
+    casse, moins de stress.
+  </p>
+
+  <div class="info-card">
+    <p>
+      <strong>Astuce&nbsp;:</strong> demandez votre devis deux à quatre semaines avant la
+      date souhaitée, surtout pour une fin de mois ou un samedi. Vous aurez plus de choix
+      de créneaux — et l'esprit tranquille plus tôt.
+    </p>
+  </div>
+</ServiceLayout>

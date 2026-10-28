@@ -1,0 +1,145 @@
+---
+import { Image } from 'astro:assets';
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import { company } from '../data/company';
+import { faqInternational } from '../data/faq';
+import img from '../assets/images/chargement-camion-demenagement.jpg';
+import contImg from '../assets/images/camions-quai-chargement.jpg';
+
+const destinations = [
+  {
+    country: 'France',
+    text: "Paris, Lille, Lyon, Marseille et toutes les régions françaises. La destination la plus demandée depuis Bruxelles, souvent réalisable en une journée pour le nord du pays.",
+  },
+  {
+    country: 'Pays-Bas',
+    text: "Amsterdam, Rotterdam, La Haye, Utrecht : des trajets courts et bien rodés, idéaux pour un déménagement rapide entre la Belgique et les Pays-Bas.",
+  },
+  {
+    country: 'Allemagne',
+    text: "Cologne, Düsseldorf, Francfort, Berlin, Munich : nous organisons régulièrement des déménagements vers l'Allemagne, pour les expatriés comme pour les familles.",
+  },
+  {
+    country: 'Luxembourg',
+    text: "Luxembourg-Ville et tout le Grand-Duché : une destination privilégiée des travailleurs frontaliers, à moins de trois heures de route de Bruxelles.",
+  },
+  {
+    country: 'Espagne & Portugal',
+    text: "Madrid, Barcelone, Valence, Alicante, Lisbonne, Porto : pour une expatriation ou une résidence secondaire, avec emballage renforcé pour la longue route.",
+  },
+  {
+    country: 'Italie, Suisse & autres',
+    text: "Milan, Rome, Genève, Zurich, Vienne… et d'autres destinations européennes sur demande. Décrivez votre projet, nous construisons la solution logistique.",
+  },
+];
+---
+
+<ServiceLayout
+  title="Déménagement international depuis Bruxelles — Europe | AZ Déménagement"
+  description="Déménagement international depuis Bruxelles vers la France, les Pays-Bas, l'Allemagne, l'Espagne et toute l'Europe. Porte à porte, emballage renforcé, devis gratuit."
+  h1="Déménagement international depuis Bruxelles"
+  intro="Nouvelle vie à l'étranger ? AZ Déménagement organise votre déménagement international de porte à porte : emballage renforcé, chargement sécurisé, transport routier européen et livraison chez vous, avec remontage des meubles. Vous voyagez léger, vos affaires arrivent entières."
+  image={img}
+  imageAlt="Grande camionnette de déménagement en cours de chargement"
+  crumbs={[{ label: 'Déménagement international', href: '/demenagement-international/' }]}
+  serviceName="Déménagement international"
+  areaServed="Europe"
+  faq={faqInternational}
+  faqTitle="Vos questions sur le déménagement international"
+  ctaTitle="Votre déménagement à l'étranger, organisé de A à Z"
+>
+  <h2>Déménager à l'étranger sans stress, c'est possible</h2>
+  <p>
+    Un déménagement international ajoute une couche de complexité&nbsp;: distance,
+    logistique, coordination des dates, protection des biens sur des centaines de
+    kilomètres. Notre rôle est d'absorber cette complexité à votre place. Depuis
+    Bruxelles, nous gérons l'intégralité de la chaîne — de l'emballage dans votre salon
+    jusqu'au dernier meuble remonté dans votre nouveau logement — avec un interlocuteur
+    unique qui suit votre dossier.
+  </p>
+
+  <h2>Comment se déroule votre déménagement international&nbsp;?</h2>
+  <ul class="check-list">
+    <li><strong>1. Devis personnalisé</strong> — vous décrivez votre volume, vos deux adresses et votre calendrier&nbsp;; nous construisons une offre claire et détaillée, gratuitement.</li>
+    <li><strong>2. Préparation et emballage</strong> — emballage renforcé des objets fragiles, housses et couvertures pour le mobilier, démontage des meubles volumineux. Pour les longs trajets, chaque protection compte.</li>
+    <li><strong>3. Chargement sécurisé</strong> — le camion est chargé avec méthode&nbsp;: répartition du poids, calage, sanglage. Rien ne bouge entre Bruxelles et votre destination.</li>
+    <li><strong>4. Transport routier européen</strong> — nous planifions l'itinéraire et les horaires, et vous tenons informé de l'avancement du transport.</li>
+    <li><strong>5. Livraison et installation</strong> — déchargement, remontage des meubles, placement des cartons pièce par pièce. Il ne vous reste qu'à ouvrir les cartons.</li>
+  </ul>
+
+  <h2>Nos principales destinations en Europe</h2>
+  <div class="destinations">
+    {destinations.map((d) => (
+      <div class="card destination-card">
+        <h3>{d.country}</h3>
+        <p>{d.text}</p>
+      </div>
+    ))}
+  </div>
+
+  <h2>Dans les deux sens&nbsp;: départ et retour</h2>
+  <p>
+    Nous organisons aussi les déménagements <strong>vers la Belgique</strong>&nbsp;: si
+    vous rentrez d'expatriation ou vous installez à Bruxelles depuis un autre pays
+    européen, la même équipe s'occupe de tout. Et si votre déménagement reste dans le
+    pays, découvrez nos services de
+    <a href="/services/demenagement-bruxelles/">déménagement à Bruxelles</a> et
+    <a href="/services/demenagement-belgique/">partout en Belgique</a>.
+  </p>
+
+  <div class="intl-photo">
+    <Image
+      src={contImg}
+      alt="Camions de déménagement alignés au quai de chargement avant le départ"
+      width={900}
+      densities={[1, 2]}
+      loading="lazy"
+    />
+  </div>
+
+  <h2>Un devis international précis et gratuit</h2>
+  <p>
+    Le prix d'un déménagement international dépend du volume, de la destination et des
+    conditions d'accès aux deux adresses. Pour recevoir une offre fiable, indiquez dans
+    votre <a href={company.quoteUrl} target="_blank" rel="noopener">demande de devis</a>&nbsp;: la ville et le pays de
+    destination, le volume estimé (ou le type de logement), la date souhaitée et les
+    services attendus (emballage, montage, fournitures). Nous revenons vers vous
+    rapidement avec une proposition détaillée, sans engagement.
+  </p>
+
+  <div class="info-card">
+    <p>
+      <strong>Conseil&nbsp;:</strong> pour un déménagement international, anticipez si
+      possible trois à six semaines. Vous obtiendrez les meilleures dates et le temps
+      nécessaire pour préparer sereinement les formalités liées à votre nouvelle adresse
+      (bail, énergie, école, immatriculation…).
+    </p>
+  </div>
+</ServiceLayout>
+
+<style>
+  .destinations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin: 1.4rem 0 1.8rem;
+  }
+
+  .destination-card h3 { color: var(--blue-600); margin-bottom: 0.4rem; }
+  .destination-card p { margin: 0; font-size: 0.96rem; }
+
+  .intl-photo { margin: 2rem 0; }
+
+  .intl-photo :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+  }
+
+  @media (max-width: 900px) {
+    .destinations { grid-template-columns: 1fr; }
+  }
+</style>

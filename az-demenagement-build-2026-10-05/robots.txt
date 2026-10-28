@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://az-demenagement.be/sitemap-index.xml

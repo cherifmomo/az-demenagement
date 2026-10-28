@@ -1,0 +1,200 @@
+---
+// Layout des pages service : hero + contenu + FAQ + CTA, avec schéma Service.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { company } from '../data/company';
+import type { FaqItem } from '../data/faq';
+
+interface Props {
+  /** Title SEO (balise <title>) */
+  title: string;
+  /** Meta description */
+  description: string;
+  /** H1 affiché */
+  h1: string;
+  /** Paragraphe d'introduction sous le H1 */
+  intro: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  crumbs: { label: string; href?: string }[];
+  serviceName: string;
+  areaServed?: string;
+  faq?: FaqItem[];
+  faqTitle?: string;
+  ctaTitle?: string;
+}
+
+const {
+  title,
+  description,
+  h1,
+  intro,
+  image,
+  imageAlt,
+  crumbs,
+  serviceName,
+  areaServed = 'Bruxelles et Belgique',
+  faq,
+  faqTitle = 'Questions fréquentes',
+  ctaTitle,
+} = Astro.props;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: serviceName,
+  name: serviceName,
+  description,
+  provider: { '@id': `${company.domain}/#organization` },
+  areaServed,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<BaseLayout title={title} description={description} schema={[serviceSchema]}>
+  <Breadcrumbs crumbs={crumbs} />
+
+  <section class="service-hero">
+    <div class="container service-hero-inner">
+      <div>
+        <h1>{h1}</h1>
+        <slot name="after-h1" />
+        <p class="service-intro">{intro}</p>
+        <div class="service-ctas">
+          <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+            Demander un devis gratuit
+            <Icon name="arrow" size={18} />
+          </a>
+          <a href={company.phoneHref} class="btn btn--outline btn--lg">
+            <Icon name="phone" size={18} />
+            {company.phoneDisplay}
+          </a>
+        </div>
+      </div>
+      <div class="service-media">
+        <Image
+          src={image}
+          alt={imageAlt}
+          width={640}
+          densities={[1, 2]}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <slot name="after-hero" />
+
+  <section class="section service-body">
+    <div class="container">
+      <slot />
+    </div>
+  </section>
+
+  {faq && faq.length > 0 && (
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">FAQ</span>
+          <h2>{faqTitle}</h2>
+        </div>
+        <Faq items={faq} withSchema={true} />
+      </div>
+    </section>
+  )}
+
+  <CtaBanner title={ctaTitle} />
+</BaseLayout>
+
+<style>
+  .service-hero {
+    background: linear-gradient(180deg, var(--blue-50), #ffffff);
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+
+  .service-hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+
+  .service-intro {
+    font-size: 1.12rem;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin-bottom: 1.6rem;
+  }
+
+  .service-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .service-media :global(img) {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .service-body :global(h2) { margin-top: 2rem; }
+  .service-body :global(h2:first-child) { margin-top: 0; }
+  .service-body :global(p),
+  .service-body :global(li) { color: var(--ink-soft); }
+  .service-body :global(strong) { color: var(--ink); }
+
+  .service-body :global(.two-col) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    margin: 1.5rem 0;
+  }
+
+  .service-body :global(.check-list) {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .service-body :global(.check-list li) {
+    position: relative;
+    padding-left: 1.7rem;
+  }
+
+  .service-body :global(.check-list li)::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 800;
+    color: var(--success);
+  }
+
+  .service-body :global(.info-card) {
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.6rem;
+    margin: 1.8rem 0;
+  }
+
+  .service-body :global(.info-card p:last-child) { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .service-hero-inner { grid-template-columns: 1fr; }
+    .service-media { order: -1; }
+    .service-media :global(img) { aspect-ratio: 16 / 9; }
+    .service-body :global(.two-col) { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { company } from '../data/company';
+
+const title = 'Politique de cookies | AZ Déménagement';
+const description =
+  "Quels cookies utilise az-demenagement.be (Google Analytics, Google Tag Manager, Google Ads), pour quelles finalités, et comment gérer votre consentement à tout moment.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Breadcrumbs crumbs={[{ label: 'Politique de cookies', href: '/politique-cookies/' }]} />
+
+  <section class="section">
+    <div class="container prose">
+      <h1>Politique de cookies</h1>
+      <p>
+        Cette page explique quels cookies et technologies similaires sont utilisés sur le
+        site az-demenagement.be, édité par {company.legalName}, dans quel but, et comment
+        vous pouvez gérer vos préférences.
+      </p>
+
+      <h2>Qu'est-ce qu'un cookie&nbsp;?</h2>
+      <p>
+        Un cookie est un petit fichier texte déposé sur votre appareil lors de la
+        consultation d'un site. Il permet, par exemple, de mémoriser vos choix ou de
+        mesurer la fréquentation du site. Certains cookies sont indispensables au
+        fonctionnement du site&nbsp;; d'autres ne sont déposés qu'avec votre accord.
+      </p>
+
+      <h2>Votre consentement</h2>
+      <p>
+        Lors de votre première visite, une bannière vous propose trois choix&nbsp;:
+        <strong>Tout accepter</strong>, <strong>Tout refuser</strong> ou
+        <strong>Personnaliser</strong> (choix catégorie par catégorie). Tant que vous
+        n'avez pas fait de choix, aucun cookie de mesure d'audience ni publicitaire n'est
+        déposé&nbsp;: nos outils Google fonctionnent en mode «&nbsp;consentement
+        refusé&nbsp;» (Google Consent Mode), c'est-à-dire sans cookie et sans identifiant
+        personnel.
+      </p>
+      <p>
+        Vous pouvez modifier votre choix à tout moment en cliquant sur
+        <a href="/politique-cookies/" data-open-cookie-settings><strong>Gérer les cookies</strong></a>
+        (également accessible dans le pied de page de chaque page). Votre choix est
+        conservé pendant 6 mois maximum, après quoi la bannière vous est de nouveau
+        présentée.
+      </p>
+
+      <h2>Les cookies utilisés</h2>
+
+      <h3>1. Cookies strictement nécessaires (toujours actifs)</h3>
+      <p>
+        Ils permettent au site de fonctionner et de mémoriser vos préférences de
+        consentement. Ils ne nécessitent pas votre accord.
+      </p>
+      <ul>
+        <li>
+          <strong>Mémorisation du consentement</strong> — stockage local
+          (<code>az_cookie_consent</code>) : conserve vos choix cookies. Durée&nbsp;: 6 mois.
+        </li>
+      </ul>
+
+      <h3>2. Cookies de mesure d'audience (soumis à consentement)</h3>
+      <p>
+        Nous utilisons <strong>Google Analytics 4</strong> (Google Ireland Ltd.) pour
+        comprendre comment le site est utilisé&nbsp;: pages consultées, provenance des
+        visites, appareils utilisés, clics sur les boutons de contact. Ces statistiques
+        sont agrégées et ne nous permettent pas de vous identifier. Nous ne transmettons
+        jamais à Google votre nom, votre e-mail, votre téléphone ni le contenu de vos
+        demandes.
+      </p>
+      <ul>
+        <li><strong>_ga</strong> — identifiant de visiteur anonyme. Durée&nbsp;: 13 mois.</li>
+        <li><strong>_ga_*</strong> — maintien de la session de visite. Durée&nbsp;: 13 mois.</li>
+      </ul>
+
+      <h3>3. Cookies publicitaires (soumis à consentement)</h3>
+      <p>
+        Si vous les acceptez, ils permettent de mesurer l'efficacité de nos campagnes
+        <strong>Google Ads</strong> (par exemple, savoir qu'une demande de devis fait
+        suite à une annonce) et, le cas échéant, d'adapter les annonces qui vous sont
+        présentées. Sans votre accord, aucune donnée publicitaire personnelle n'est
+        collectée.
+      </p>
+      <ul>
+        <li><strong>_gcl_au</strong> — attribution des conversions Google Ads. Durée&nbsp;: 90 jours.</li>
+        <li><strong>Cookies Google Ads / DoubleClick</strong> (domaine google.com) — mesure et personnalisation publicitaire.</li>
+      </ul>
+
+      <h3>Outil de gestion des balises</h3>
+      <p>
+        Le site utilise <strong>Google Tag Manager</strong> pour charger les outils
+        ci-dessus. Google Tag Manager ne dépose pas lui-même de cookie de suivi&nbsp;; il
+        respecte les choix exprimés dans la bannière de consentement.
+      </p>
+
+      <h2>Formulaire de devis</h2>
+      <p>
+        Le formulaire de demande de devis est hébergé sur notre plateforme de gestion
+        (Odoo). Les données que vous y saisissez servent uniquement à traiter votre
+        demande&nbsp;; elles ne sont pas transmises à nos outils de mesure d'audience.
+        Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.
+      </p>
+
+      <h2>Comment désactiver les cookies dans votre navigateur&nbsp;?</h2>
+      <p>
+        En plus de notre bannière, vous pouvez configurer votre navigateur pour bloquer ou
+        supprimer les cookies (menu Paramètres → Confidentialité). Vous pouvez aussi
+        installer le
+        <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener noreferrer" target="_blank">
+          module de désactivation de Google Analytics</a>.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Pour toute question relative aux cookies, contactez-nous à
+        <a href={`mailto:${company.email}`}>{company.email}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
