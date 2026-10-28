@@ -52,5 +52,3 @@ jobs:
           protocol: ftps
           server-dir: ${{ secrets.FTP_DIR }}
           local-dir: dist/
-|
-            admin/.env
