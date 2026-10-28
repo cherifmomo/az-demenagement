@@ -1,0 +1,14 @@
+{
+  "brand": "AZ Déménagement",
+  "legalName": "AZ Solutions Belgium",
+  "phoneDisplay": "0471 / 65 39 47",
+  "phoneInternational": "+32 471 65 39 47",
+  "email": "info@az-vide-express.be",
+  "quoteUrl": "https://az-solutions.odoo.com/az-demenagement-be",
+  "street": "Boulevard du Midi 125",
+  "postalCode": "1000",
+  "city": "Bruxelles",
+  "vat": "BE 0823 848 714",
+  "hoursWeek": "9h00 – 17h00",
+  "hoursSaturday": "Sur rendez-vous"
+}

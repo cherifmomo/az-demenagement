@@ -1,0 +1,175 @@
+# ============================================================
+# Administration du site az-demenagement.be (Sveltia CMS)
+# ⚠️ Remplacez VOTRE-COMPTE-GITHUB par le nom du compte GitHub
+#    une fois le dépôt créé (ex. azsolutions/az-demenagement).
+# ============================================================
+
+backend:
+  name: github
+  repo: VOTRE-COMPTE-GITHUB/az-demenagement
+  branch: main
+
+site_url: https://az-demenagement.be
+display_url: https://az-demenagement.be
+locale: fr
+
+# Médiathèque : les images téléversées sont automatiquement
+# converties en WebP et limitées à 1600 px (comme WordPress, en mieux).
+media_folder: /public/uploads
+public_folder: /uploads
+
+media_libraries:
+  default:
+    config:
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 1600
+          height: 1600
+        svg:
+          optimize: true
+
+collections:
+  - name: reglages
+    label: Réglages
+    icon: settings
+    files:
+      - name: coordonnees
+        label: Coordonnées de l'entreprise
+        file: src/content/settings.json
+        fields:
+          - { name: brand, label: Nom commercial, widget: string }
+          - { name: legalName, label: Raison sociale, widget: string }
+          - { name: phoneDisplay, label: Téléphone affiché, widget: string, hint: 'Exemple : 0471 / 65 39 47' }
+          - { name: phoneInternational, label: Téléphone international, widget: string, hint: 'Exemple : +32 471 65 39 47 — utilisé pour les boutons d''appel' }
+          - { name: email, label: E-mail, widget: string }
+          - { name: quoteUrl, label: Lien du formulaire de devis (Odoo), widget: string }
+          - { name: street, label: Rue et numéro, widget: string }
+          - { name: postalCode, label: Code postal, widget: string }
+          - { name: city, label: Ville, widget: string }
+          - { name: vat, label: Numéro de TVA, widget: string }
+          - { name: hoursWeek, label: 'Horaires (lundi–vendredi)', widget: string }
+          - { name: hoursSaturday, label: Horaires (samedi), widget: string }
+
+  - name: accueil
+    label: "Page d'accueil"
+    icon: home
+    files:
+      - name: home
+        label: "Sections de l'accueil"
+        file: src/content/home.json
+        fields:
+          - name: hero
+            label: Bandeau principal (haut de page)
+            widget: object
+            fields:
+              - { name: title, label: Titre principal (H1), widget: string }
+              - { name: subtitle, label: Sous-titre, widget: text }
+              - { name: image, label: Photo, widget: image }
+              - { name: imageAlt, label: Description de la photo (SEO), widget: string }
+              - name: points
+                label: Points forts (liste à puces)
+                widget: list
+                field: { name: point, label: Point, widget: string }
+          - name: boutique
+            label: Section Boutique
+            widget: object
+            fields:
+              - { name: title, label: Titre, widget: string }
+              - { name: text, label: Texte, widget: text }
+              - { name: image, label: Photo, widget: image }
+              - { name: imageAlt, label: Description de la photo (SEO), widget: string }
+              - name: points
+                label: Points forts (liste à puces)
+                widget: list
+                field: { name: point, label: Point, widget: string }
+
+  - name: services
+    label: Services
+    icon: package_2
+    files:
+      - name: liste
+        label: Liste des services
+        file: src/content/services.json
+        fields:
+          - name: services
+            label: Services
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: slug, label: Identifiant technique, widget: string, hint: 'Ne pas modifier sans raison' }
+              - { name: href, label: Lien de la page, widget: string, hint: 'Exemple : /services/demenagement-bruxelles/ ou /boutique/' }
+              - { name: title, label: Titre complet, widget: string }
+              - { name: shortTitle, label: Titre court (menu), widget: string }
+              - { name: description, label: Description (carte), widget: text }
+              - { name: icon, label: Icône, widget: select, options: [city, map, globe, home, office, truck, box, tools], default: box }
+              - { name: external, label: Lien externe (nouvel onglet), widget: boolean, required: false, default: false }
+
+  - name: faq
+    label: FAQ
+    icon: help
+    files:
+      - name: questions
+        label: Questions fréquentes
+        file: src/content/faq.json
+        fields:
+          - name: faqHome
+            label: "FAQ de l'accueil"
+            widget: list
+            summary: '{{fields.question}}'
+            fields:
+              - { name: question, label: Question, widget: string }
+              - { name: answer, label: Réponse, widget: text }
+          - name: faqInternational
+            label: FAQ déménagement international
+            widget: list
+            summary: '{{fields.question}}'
+            fields:
+              - { name: question, label: Question, widget: string }
+              - { name: answer, label: Réponse, widget: text }
+
+  - name: boutique
+    label: Boutique
+    icon: shopping_cart
+    files:
+      - name: catalogue
+        label: Produits et catégories
+        file: src/content/products.json
+        media_folder: /public/boutique
+        public_folder: /boutique
+        fields:
+          - name: categories
+            label: Catégories
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: id, label: Identifiant technique, widget: string, hint: 'Ne pas modifier : relie les produits à la catégorie' }
+              - { name: title, label: Nom de la catégorie, widget: string }
+              - { name: sub, label: Phrase d'introduction, widget: text }
+          - name: products
+            label: Produits
+            widget: list
+            summary: '{{fields.name}} — {{fields.price}} €'
+            fields:
+              - { name: id, label: Identifiant technique, widget: string, hint: 'Unique, sans espaces (ex. kit-petit)' }
+              - name: cat
+                label: Catégorie
+                widget: select
+                options:
+                  - { label: Kits de déménagement, value: kits }
+                  - { label: Cartons, value: cartons }
+                  - { label: Emballage & protection, value: emballage }
+                  - { label: Manutention & fixation, value: manutention }
+              - { name: name, label: Nom du produit, widget: string }
+              - { name: price, label: Prix TVAC (€), widget: number, value_type: float, min: 0, step: 0.01 }
+              - { name: img, label: Photo, widget: image }
+              - { name: alt, label: Description de la photo (SEO), widget: string }
+              - { name: dims, label: Dimensions / caractéristiques courtes, widget: string }
+              - { name: desc, label: Description commerciale, widget: text }
+              - name: specs
+                label: Caractéristiques (liste)
+                widget: list
+                field: { name: spec, label: Caractéristique, widget: string }
+              - { name: page, label: 'Lien fiche détaillée (optionnel)', widget: string, required: false }
+              - { name: badge, label: 'Badge (optionnel, ex. Kit complet)', widget: string, required: false }

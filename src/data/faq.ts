@@ -1,88 +1,12 @@
-// FAQ principale du site (page d'accueil + schéma FAQPage).
-// Les réponses restent volontairement générales : aucun tarif précis ni statistique n'est inventé.
+// FAQ du site (accueil + international, avec schéma FAQPage).
+// ÉDITABLE VIA L'ADMIN (/admin/ → FAQ) : src/content/faq.json
+
+import data from '../content/faq.json';
 
 export interface FaqItem {
   question: string;
   answer: string;
 }
 
-export const faqHome: FaqItem[] = [
-  {
-    question: 'Combien coûte un déménagement à Bruxelles ?',
-    answer:
-      "Le prix dépend de plusieurs facteurs : le volume à transporter, la distance entre les deux adresses, l'étage, la présence d'un ascenseur, la nécessité d'un lift de déménagement et les services choisis (emballage, montage de meubles, fournitures). C'est pourquoi nous établissons toujours un devis gratuit et personnalisé plutôt que d'annoncer un tarif unique. Décrivez-nous votre situation via le formulaire de devis et vous recevrez une estimation claire, sans engagement et sans frais cachés.",
-  },
-  {
-    question: 'Comment obtenir un devis de déménagement ?',
-    answer:
-      "C'est très simple : remplissez notre formulaire de devis en ligne en indiquant vos adresses de départ et d'arrivée, la date souhaitée, le volume estimé et les éventuels services complémentaires. Vous pouvez aussi nous appeler directement au 0471 / 65 39 47. Nous revenons vers vous rapidement avec une offre détaillée et gratuite. Pour les volumes importants ou les situations particulières, une visite ou un échange vidéo peut être organisé afin d'affiner l'estimation.",
-  },
-  {
-    question: "Combien de temps à l'avance faut-il réserver un déménageur ?",
-    answer:
-      "Idéalement, contactez-nous deux à quatre semaines avant la date souhaitée, surtout en fin de mois, en été et lors des week-ends, qui sont les périodes les plus demandées. Cela dit, nous savons qu'un déménagement peut devoir s'organiser vite : n'hésitez pas à nous appeler même pour une demande urgente, nous faisons notre maximum pour trouver une solution rapide.",
-  },
-  {
-    question: 'Faites-vous des déménagements dans toutes les communes de Bruxelles ?',
-    answer:
-      "Oui. Nous intervenons dans les 19 communes de la Région de Bruxelles-Capitale : Bruxelles-Ville, Anderlecht, Schaerbeek, Ixelles, Uccle, Saint-Gilles, Etterbeek, Molenbeek-Saint-Jean, Forest, Jette, Evere, Woluwe-Saint-Pierre, Woluwe-Saint-Lambert, Auderghem, Watermael-Boitsfort, Koekelberg, Ganshoren, Berchem-Sainte-Agathe et Saint-Josse-ten-Noode. Nous connaissons les spécificités de chaque commune, y compris les demandes de réservation de stationnement pour le camion.",
-  },
-  {
-    question: 'Faites-vous des déménagements partout en Belgique ?',
-    answer:
-      "Absolument. Depuis Bruxelles, nous déménageons vers toutes les provinces belges : Brabant wallon, Brabant flamand, Anvers, Gand, Liège, Namur, Charleroi, Mons, la côte belge et toutes les autres destinations. Nous assurons aussi les trajets inverses, vers Bruxelles, ainsi que les déménagements entre deux villes belges.",
-  },
-  {
-    question: 'Proposez-vous des déménagements internationaux ?',
-    answer:
-      "Oui, le déménagement international est l'une de nos spécialités. Nous organisons des déménagements de porte à porte depuis Bruxelles vers la France, les Pays-Bas, l'Allemagne, le Luxembourg, l'Espagne, l'Italie et d'autres pays européens, ainsi que les retours vers la Belgique. Emballage renforcé, chargement sécurisé et coordination du transport : nous nous occupons de toute la logistique.",
-  },
-  {
-    question: 'Pouvez-vous démonter et remonter les meubles ?',
-    answer:
-      "Oui. Notre équipe démonte vos meubles avant le chargement (armoires, lits, dressings, tables, meubles en kit) et les remonte à votre nouvelle adresse. La visserie est triée et conservée dans des sachets étiquetés pour un remontage sans mauvaise surprise. Précisez simplement les meubles concernés dans votre demande de devis.",
-  },
-  {
-    question: "Fournissez-vous du matériel d'emballage ?",
-    answer:
-      "Oui, nous pouvons fournir cartons, papier bulle, couvertures de protection, film étirable et housses pour matelas. Vous pouvez soit emballer vous-même avec notre matériel, soit confier l'emballage complet à notre équipe, notamment pour la vaisselle et les objets fragiles.",
-  },
-  {
-    question: 'Comment préparer son déménagement ?',
-    answer:
-      "Quelques réflexes facilitent beaucoup le jour J : triez vos affaires et débarrassez-vous du superflu, étiquetez chaque carton avec la pièce de destination, préparez un carton « premières heures » (chargeurs, documents, produits d'hygiène), videz et dégivrez le frigo et le congélateur la veille, et pensez à réserver un emplacement de stationnement devant les deux adresses. Nous vous guidons sur tous ces points lors de la préparation de votre devis.",
-  },
-  {
-    question: "Comment est calculé le prix d'un déménagement ?",
-    answer:
-      "Le devis se base principalement sur le volume à déménager (en m³), la distance du trajet, l'accessibilité des deux logements (étage, ascenseur, largeur des escaliers, besoin d'un lift), et les services choisis : emballage, fourniture de cartons, démontage et remontage des meubles. Chaque devis est détaillé poste par poste, pour que vous sachiez exactement ce que vous payez.",
-  },
-];
-
-export const faqInternational: FaqItem[] = [
-  {
-    question: 'Dans quels pays déménagez-vous depuis Bruxelles ?',
-    answer:
-      "Nous organisons des déménagements depuis Bruxelles et la Belgique vers la plupart des pays européens : France, Pays-Bas, Luxembourg, Allemagne, Espagne, Portugal, Italie, Suisse, Autriche et d'autres destinations sur demande. Nous assurons aussi les déménagements de retour vers la Belgique. Contactez-nous avec votre destination précise pour recevoir une offre adaptée.",
-  },
-  {
-    question: 'Comment se déroule un déménagement international ?',
-    answer:
-      "Tout commence par un devis personnalisé basé sur votre volume et votre destination. Nous planifions ensuite l'emballage (renforcé pour la route), le démontage éventuel des meubles, le chargement sécurisé du camion, le transport jusqu'à votre nouvelle adresse et la livraison avec déchargement, remontage et placement des meubles. Vous avez un interlocuteur unique du début à la fin.",
-  },
-  {
-    question: "Combien coûte un déménagement international ?",
-    answer:
-      "Le prix dépend surtout du volume transporté, de la distance et des conditions d'accès aux deux adresses. Un déménagement vers Paris ou Amsterdam ne se chiffre pas comme un déménagement vers Madrid ou Rome. Nous établissons systématiquement un devis gratuit et détaillé pour votre trajet précis, sans frais cachés.",
-  },
-  {
-    question: "Mes meubles sont-ils protégés pendant un long trajet ?",
-    answer:
-      "Oui. Pour les trajets internationaux, nous renforçons l'emballage : couvertures de déménagement, film étirable, cartons double cannelure pour les objets fragiles, housses pour matelas et canapés. Le chargement est calé et sanglé dans le camion pour éviter tout mouvement pendant la route.",
-  },
-  {
-    question: 'Combien de temps prend un déménagement vers un autre pays ?',
-    answer:
-      "Pour les pays limitrophes (France, Pays-Bas, Luxembourg, Allemagne), un déménagement peut souvent se faire sur un ou deux jours. Pour les destinations plus lointaines comme l'Espagne, le Portugal ou l'Italie, il faut généralement compter quelques jours entre le chargement et la livraison. Le planning précis est défini avec vous lors du devis.",
-  },
-];
+export const faqHome: FaqItem[] = data.faqHome;
+export const faqInternational: FaqItem[] = data.faqInternational;

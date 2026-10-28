@@ -8,12 +8,11 @@ import QuoteCta from '../components/QuoteCta.astro';
 import { company, communes } from '../data/company';
 import { services } from '../data/services';
 import { faqHome } from '../data/faq';
+import home from '../content/home.json';
 
-import heroImg from '../assets/images/equipe-demenageurs-chargement.jpg';
 import bruxellesImg from '../assets/images/demenageur-cartons-fragile-camion.jpg';
 import intlImg from '../assets/images/chargement-camion-demenagement.jpg';
 import planImg from '../assets/images/camion-itineraire-demenagement.jpg';
-import boutiqueImg from '../assets/images/fermeture-carton-demenagement.jpg';
 
 const title = 'Déménagement Bruxelles — Déménageur en Belgique & international | AZ Déménagement';
 const description =
@@ -85,12 +84,8 @@ const advantages = [
           <Icon name="pin" size={16} />
           Entreprise de déménagement — Bruxelles, Belgique &amp; Europe
         </p>
-        <h1>Déménagement à Bruxelles et à l'international</h1>
-        <p class="hero-sub">
-          AZ Déménagement vous accompagne pour votre déménagement à Bruxelles, partout en
-          Belgique et à l'étranger. Particuliers et entreprises, avec emballage, montage
-          des meubles et transport sécurisé.
-        </p>
+        <h1>{home.hero.title}</h1>
+        <p class="hero-sub">{home.hero.subtitle}</p>
         <div class="hero-ctas">
           <a href={company.quoteUrl} target="_blank" rel="noopener" class="btn btn--primary btn--lg">
             Demander un devis gratuit
@@ -102,17 +97,17 @@ const advantages = [
           </a>
         </div>
         <ul class="hero-points">
-          <li><Icon name="check-circle" size={18} /> Devis gratuit sous 24 à 48 h ouvrables</li>
-          <li><Icon name="check-circle" size={18} /> Les 19 communes de Bruxelles</li>
-          <li><Icon name="check-circle" size={18} /> Déménagements internationaux en Europe</li>
+          {home.hero.points.map((p) => (
+            <li><Icon name="check-circle" size={18} /> {p}</li>
+          ))}
         </ul>
       </div>
       <div class="hero-media">
-        <Image
-          src={heroImg}
-          alt="Équipe de déménageurs professionnels en uniforme chargeant des cartons dans le camion de déménagement"
-          width={720}
-          densities={[1, 2]}
+        <img
+          src={home.hero.image}
+          alt={home.hero.imageAlt}
+          width="1600"
+          height="1067"
           loading="eager"
           fetchpriority="high"
         />
@@ -124,27 +119,22 @@ const advantages = [
   <section class="section section--soft">
     <div class="container boutique-grid">
       <div class="boutique-media">
-        <Image
-          src={boutiqueImg}
-          alt="Fermeture d'un carton de déménagement au ruban adhésif"
-          width={640}
-          densities={[1, 2]}
+        <img
+          src={home.boutique.image}
+          alt={home.boutique.imageAlt}
+          width="1600"
+          height="1067"
           loading="lazy"
         />
       </div>
       <div>
         <span class="kicker">Boutique</span>
-        <h2>Cartons et matériel de déménagement en vente directe</h2>
-        <p>
-          Kits de déménagement complets à partir de 34,99&nbsp;€, cartons double
-          cannelure, papier bulle, housses matelas, sangles, chariot et diable&nbsp;:
-          achetez votre matériel au prix juste, avec les conseils de vrais déménageurs
-          sur les quantités adaptées à votre volume.
-        </p>
+        <h2>{home.boutique.title}</h2>
+        <p>{home.boutique.text}</p>
         <ul class="boutique-points">
-          <li><Icon name="check-circle" size={18} /> Kits complets pour studio, appartement et maison</li>
-          <li><Icon name="check-circle" size={18} /> Cartons renforcés vendus à l'unité</li>
-          <li><Icon name="check-circle" size={18} /> Commande simple par téléphone</li>
+          {home.boutique.points.map((p) => (
+            <li><Icon name="check-circle" size={18} /> {p}</li>
+          ))}
         </ul>
         <a href="/boutique/" class="btn btn--primary">
           Découvrir la boutique

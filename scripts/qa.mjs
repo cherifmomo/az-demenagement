@@ -4,6 +4,9 @@ import { readdirSync, readFileSync, statSync, existsSync } from 'fs';
 import { join } from 'path';
 const files = [];
 (function walk(d){ for (const f of readdirSync(d)) { const p = join(d,f); statSync(p).isDirectory() ? walk(p) : f.endsWith('.html') && files.push(p);} })('dist');
+// L'admin (Sveltia CMS) est une application, pas une page de contenu
+const pages = files.filter((f) => !f.includes('/admin/'));
+files.length = 0; files.push(...pages);
 let issues = 0;
 const count = (s, re) => (s.match(re) || []).length;
 for (const f of files) {

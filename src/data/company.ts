@@ -1,27 +1,33 @@
 // Informations officielles de l'entreprise (NAP — Name, Address, Phone).
-// Source unique de vérité : toute coordonnée affichée sur le site vient d'ici.
+// ÉDITABLE VIA L'ADMIN (/admin/ → Réglages) : src/content/settings.json
+// Ce fichier ne contient que la structure ; les valeurs vivent dans le JSON.
+
+import settings from '../content/settings.json';
+
+/** tel: normalisé à partir du numéro international (ex. +32 471 65 39 47 → tel:+32471653947) */
+const phoneHref = 'tel:' + settings.phoneInternational.replace(/[^+0-9]/g, '');
 
 export const company = {
-  brand: 'AZ Déménagement',
-  legalName: 'AZ Solutions Belgium',
+  brand: settings.brand,
+  legalName: settings.legalName,
   domain: 'https://az-demenagement.be',
-  phoneDisplay: '0471 / 65 39 47',
-  phoneHref: 'tel:+32471653947',
-  phoneInternational: '+32 471 65 39 47',
-  email: 'info@az-vide-express.be',
+  phoneDisplay: settings.phoneDisplay,
+  phoneHref,
+  phoneInternational: settings.phoneInternational,
+  email: settings.email,
   /** Formulaire de demande de devis externe (Odoo) */
-  quoteUrl: 'https://az-solutions.odoo.com/az-demenagement-be',
+  quoteUrl: settings.quoteUrl,
   address: {
-    street: 'Boulevard du Midi 125',
-    postalCode: '1000',
-    city: 'Bruxelles',
+    street: settings.street,
+    postalCode: settings.postalCode,
+    city: settings.city,
     country: 'Belgique',
     countryCode: 'BE',
   },
-  vat: 'BE 0823 848 714',
+  vat: settings.vat,
   openingHours: [
-    { days: 'Du lundi au vendredi', hours: '9h00 – 17h00' },
-    { days: 'Samedi', hours: 'Sur rendez-vous' },
+    { days: 'Du lundi au vendredi', hours: settings.hoursWeek },
+    { days: 'Samedi', hours: settings.hoursSaturday },
   ],
   // Format Schema.org
   openingHoursSpecification: [

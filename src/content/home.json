@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "title": "Déménagement à Bruxelles et à l'international",
+    "subtitle": "AZ Déménagement vous accompagne pour votre déménagement à Bruxelles, partout en Belgique et à l'étranger. Particuliers et entreprises, avec emballage, montage des meubles et transport sécurisé.",
+    "image": "/uploads/equipe-demenageurs-chargement.webp",
+    "imageAlt": "Équipe de déménageurs professionnels en uniforme chargeant des cartons dans le camion de déménagement",
+    "points": [
+      "Devis gratuit sous 24 à 48 h ouvrables",
+      "Les 19 communes de Bruxelles",
+      "Déménagements internationaux en Europe"
+    ]
+  },
+  "boutique": {
+    "title": "Cartons et matériel de déménagement en vente directe",
+    "text": "Kits de déménagement complets à partir de 34,99 €, cartons double cannelure, papier bulle, housses matelas, sangles, chariot et diable : achetez votre matériel au prix juste, avec les conseils de vrais déménageurs sur les quantités adaptées à votre volume.",
+    "image": "/uploads/fermeture-carton-demenagement.webp",
+    "imageAlt": "Fermeture d'un carton de déménagement au ruban adhésif",
+    "points": [
+      "Kits complets pour studio, appartement et maison",
+      "Cartons renforcés vendus à l'unité",
+      "Commande simple par téléphone"
+    ]
+  }
+}

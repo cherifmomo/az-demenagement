@@ -1,0 +1,53 @@
+# ============================================================
+# Déploiement automatique : à chaque modification (admin ou code),
+# le site est reconstruit, vérifié, puis envoyé en FTP sur Infomaniak.
+#
+# Secrets à créer dans GitHub → Settings → Secrets and variables →
+# Actions → New repository secret :
+#   FTP_SERVER   : hôte FTP Infomaniak (ex. xxxxx.ftp.infomaniak.com)
+#   FTP_USERNAME : identifiant FTP
+#   FTP_PASSWORD : mot de passe FTP
+#   FTP_DIR      : dossier web à la racine du FTP (ex. /web/ ou /sites/az-demenagement.be/)
+# ============================================================
+
+name: Construire et déployer le site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Construire le site
+        run: npm run build
+
+      - name: Vérifier la qualité (QA)
+        run: npm run qa
+
+      - name: Déployer en FTP vers Infomaniak
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_DIR }}
+          local-dir: dist/
